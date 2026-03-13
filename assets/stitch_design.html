@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00d0ff",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#0b1215",
+                        "card-dark": "#162226",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass {
+            background: rgba(22, 34, 38, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .code-gradient {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 selection:bg-primary/30 selection:text-primary">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-background-dark">
+<span class="material-symbols-outlined font-bold">currency_exchange</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-slate-100">API SUA-BCV</h2>
+</div>
+<nav class="hidden items-center gap-8 md:flex">
+<a class="text-sm font-medium text-slate-400 transition-colors hover:text-primary" href="#">Documentación</a>
+<a class="text-sm font-medium text-slate-400 transition-colors hover:text-primary" href="#">Precios</a>
+<a class="text-sm font-medium text-slate-400 transition-colors hover:text-primary" href="#">GitHub</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden rounded-lg px-4 py-2 text-sm font-semibold text-slate-300 transition-colors hover:text-white sm:block">
+                        Login
+                    </button>
+<button class="rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-background-dark transition-transform hover:scale-105 active:scale-95">
+                        Empezar ahora
+                    </button>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<section class="relative px-6 py-20 lg:py-32">
+<div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
+<div class="flex flex-col gap-8">
+<div class="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+<span class="relative flex h-2 w-2">
+<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+</span>
+                            v1.2.0 Ya disponible
+                        </div>
+<h1 class="text-5xl font-black leading-[1.1] tracking-tight text-white md:text-6xl lg:text-7xl">
+                            API <span class="text-primary">SUA-BCV</span>: Datos cambiarios en tiempo real
+                        </h1>
+<p class="max-w-xl text-lg leading-relaxed text-slate-400 md:text-xl">
+                            Optimizado para Bun y desplegado en el Edge. Obtén las tasas oficiales del BCV con latencia mínima y máxima confiabilidad.
+                        </p>
+<div class="flex flex-wrap gap-4">
+<button class="flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-lg font-bold text-background-dark transition-all hover:shadow-[0_0_20px_rgba(0,208,255,0.4)]">
+                                Empezar ahora
+                                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/50 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-slate-800">
+<span class="material-symbols-outlined">code</span>
+                                Ver en GitHub
+                            </button>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-primary/50 to-blue-600/50 opacity-20 blur-2xl"></div>
+<div class="relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl">
+<div class="flex items-center gap-2 border-b border-white/5 bg-slate-800/50 px-4 py-3">
+<div class="h-3 w-3 rounded-full bg-red-500/50"></div>
+<div class="h-3 w-3 rounded-full bg-yellow-500/50"></div>
+<div class="h-3 w-3 rounded-full bg-green-500/50"></div>
+<span class="ml-2 text-xs font-mono text-slate-500">example.js</span>
+</div>
+<div class="p-6 font-mono text-sm leading-relaxed sm:text-base">
+<div class="text-slate-400"><span class="text-primary">const</span> response = <span class="text-primary">await</span> fetch(<span class="text-emerald-400">'https://api-sua-bcv.io/v1/usd'</span>, {</div>
+<div class="pl-4 text-slate-400">headers: { <span class="text-emerald-400">'Authorization'</span>: <span class="text-emerald-400">'Bearer YOUR_API_KEY'</span> }</div>
+<div class="text-slate-400">});</div>
+<div class="mt-4 text-slate-400"><span class="text-primary">const</span> data = <span class="text-primary">await</span> response.json();</div>
+<div class="mt-4 text-slate-400">console.log(data);</div>
+<div class="mt-4 rounded bg-slate-800/80 p-3 text-emerald-400">
+<div class="text-slate-500">// Output:</div>
+<div>{ <br/>  "rate": 36.42, <br/>  "currency": "USD", <br/>  "updated_at": "2024-05-20T14:00:00Z" <br/>}</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="border-y border-white/5 bg-slate-950/50 px-6 py-24">
+<div class="mx-auto max-w-7xl">
+<div class="mb-16 text-center">
+<h2 class="text-3xl font-bold text-white md:text-4xl">Diseñado para el Rendimiento</h2>
+<p class="mt-4 text-slate-400">Infraestructura moderna para aplicaciones de alto tráfico.</p>
+</div>
+<div class="grid gap-8 md:grid-cols-3">
+<div class="group relative rounded-2xl border border-white/5 bg-card-dark p-8 transition-all hover:border-primary/50">
+<div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+</div>
+<h3 class="mb-3 text-xl font-bold text-white">Ultra Rápida</h3>
+<p class="leading-relaxed text-slate-400">Bun runtime &amp; Vercel Edge para una latencia global mínima. Respuestas en milisegundos desde cualquier lugar.</p>
+</div>
+<div class="group relative rounded-2xl border border-white/5 bg-card-dark p-8 transition-all hover:border-primary/50">
+<div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">security</span>
+</div>
+<h3 class="mb-3 text-xl font-bold text-white">Segura</h3>
+<p class="leading-relaxed text-slate-400">Gestión avanzada de API Keys con rotación automática, gestión de vencimiento y rate limiting por aplicación.</p>
+</div>
+<div class="group relative rounded-2xl border border-white/5 bg-card-dark p-8 transition-all hover:border-primary/50">
+<div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">cloud_sync</span>
+</div>
+<h3 class="mb-3 text-xl font-bold text-white">Confiable</h3>
+<p class="leading-relaxed text-slate-400">Sincronización automática vía Upstash Redis para alta disponibilidad y consistencia de datos oficial del BCV.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="px-6 py-24">
+<div class="mx-auto max-w-4xl">
+<div class="mb-12">
+<h2 class="text-3xl font-bold text-white">Endpoints Disponibles</h2>
+<p class="mt-2 text-slate-400">Estructura de rutas simple y predecible para una integración rápida.</p>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex flex-wrap items-center gap-4 rounded-xl border border-white/5 bg-card-dark p-6 transition-transform hover:translate-x-1">
+<span class="rounded bg-primary/20 px-3 py-1 text-xs font-black tracking-widest text-primary">GET</span>
+<code class="flex-1 font-mono text-lg text-slate-200">/v1/usd</code>
+<div class="flex items-center gap-2">
+<span class="text-sm text-slate-500">Tasa oficial Dólar BCV</span>
+<div class="h-2 w-2 rounded-full bg-emerald-500"></div>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-4 rounded-xl border border-white/5 bg-card-dark p-6 transition-transform hover:translate-x-1">
+<span class="rounded bg-primary/20 px-3 py-1 text-xs font-black tracking-widest text-primary">GET</span>
+<code class="flex-1 font-mono text-lg text-slate-200">/v1/eur</code>
+<div class="flex items-center gap-2">
+<span class="text-sm text-slate-500">Tasa oficial Euro BCV</span>
+<div class="h-2 w-2 rounded-full bg-emerald-500"></div>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-4 rounded-xl border border-white/5 bg-card-dark/40 p-6 opacity-50">
+<span class="rounded bg-slate-700 px-3 py-1 text-xs font-black tracking-widest text-slate-400">GET</span>
+<code class="flex-1 font-mono text-lg text-slate-400">/v1/history</code>
+<div class="flex items-center gap-2">
+<span class="text-sm text-slate-500 italic">Próximamente</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="px-6 py-24">
+<div class="mx-auto max-w-5xl rounded-3xl bg-gradient-to-br from-primary/20 via-primary/5 to-transparent p-12 text-center border border-primary/20">
+<h2 class="text-4xl font-black text-white">¿Listo para construir el futuro?</h2>
+<p class="mx-auto mt-6 max-w-xl text-lg text-slate-400">Únete a cientos de desarrolladores que ya están integrando datos cambiarios confiables en sus plataformas.</p>
+<div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+<button class="w-full rounded-xl bg-primary px-10 py-4 text-lg font-bold text-background-dark sm:w-auto">Crear cuenta gratis</button>
+<button class="w-full rounded-xl border border-slate-700 px-10 py-4 text-lg font-bold text-white sm:w-auto">Leer documentación</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-white/5 bg-slate-950 px-6 py-12">
+<div class="mx-auto max-w-7xl">
+<div class="grid gap-12 md:grid-cols-4">
+<div class="col-span-2">
+<div class="flex items-center gap-3">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-background-dark">
+<span class="material-symbols-outlined text-sm font-bold">currency_exchange</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight text-slate-100">API SUA-BCV</h2>
+</div>
+<p class="mt-4 max-w-xs text-sm leading-relaxed text-slate-500">
+                            La solución definitiva para obtener datos cambiarios oficiales de Venezuela con la infraestructura de mayor rendimiento disponible.
+                        </p>
+</div>
+<div>
+<h4 class="mb-4 text-sm font-bold uppercase tracking-widest text-slate-400">Producto</h4>
+<ul class="flex flex-col gap-2 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">Características</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Documentación</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">SDKs</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Precios</a></li>
+</ul>
+</div>
+<div>
+<h4 class="mb-4 text-sm font-bold uppercase tracking-widest text-slate-400">Comunidad</h4>
+<ul class="flex flex-col gap-2 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">GitHub</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Twitter (X)</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Discord</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Status</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-16 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 md:flex-row">
+<p class="text-xs text-slate-600">
+                        © 2024 API SUA-BCV. No afiliado oficialmente con el BCV.
+                    </p>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-emerald-500"></span>
+<span class="text-xs font-medium text-emerald-500/80">Todos los sistemas operativos</span>
+</div>
+<div class="flex gap-4">
+<a class="text-slate-600 hover:text-white" href="#"><span class="material-symbols-outlined">brand_family</span></a>
+<a class="text-slate-600 hover:text-white" href="#"><span class="material-symbols-outlined">hub</span></a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
