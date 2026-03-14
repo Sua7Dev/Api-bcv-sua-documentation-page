@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua-BCV API Docs | Documentación Oficial</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-background text-main">
+
+    <header class="glass">
+        <div class="container flex items-center justify-between" style="max-width: 100%; padding: 0 40px;">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <span class="material-symbols-outlined">api</span>
+                    </div>
+                    API SUA-BCV
+                </a>
+                <nav style="margin-left: 40px;">
+                    <ul class="flex gap-4">
+                        <li><a href="#" class="active" style="color: var(--primary);">Docs</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div class="search-bar" style="position: relative;">
+                    <span class="material-symbols-outlined" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--text-muted);">search</span>
+                    <input type="text" placeholder="Buscar documentación..." style="background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 16px 10px 40px; color: white; width: 300px; font-size: 0.9rem;">
+                </div>
+                <button class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">login</span>
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="docs-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-nav">
+                <div class="nav-group">
+                    <h5>General</h5>
+                    <a href="#introduction" class="nav-link active">
+                        <span class="material-symbols-outlined">info</span>
+                        Introducción
+                    </a>
+                    <a href="#authentication" class="nav-link">
+                        <span class="material-symbols-outlined">lock</span>
+                        Autenticación
+                    </a>
+                    <a href="#endpoints" class="nav-link">
+                        <span class="material-symbols-outlined">cloud_sync</span>
+                        Endpoints
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <h5>SDK & Ejemplos</h5>
+                    <a href="#javascript" class="nav-link">
+                        <span class="material-symbols-outlined">javascript</span>
+                        JavaScript (Bun)
+                    </a>
+                    <a href="#dart" class="nav-link">
+                        <span class="material-symbols-outlined">flutter</span>
+                        Dart (Flutter)
+                    </a>
+                    <a href="#python" class="nav-link">
+                        <span class="material-symbols-outlined">terminal</span>
+                        Python (Requests)
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <h5>Comunidad</h5>
+                    <a href="#changelog" class="nav-link">
+                        <span class="material-symbols-outlined">history</span>
+                        Changelog
+                    </a>
+                    <a href="#" class="nav-link">
+                        <span class="material-symbols-outlined">forum</span>
+                        Foro de Soporte
+                    </a>
+                </div>
+
+                <div style="margin-top: auto; padding-top: 40px;">
+                    <a href="https://github.com/Sua7Dev/api-bcv-sua" target="_blank" class="btn btn-secondary" style="width: 100%; font-size: 0.85rem;">
+                        <span class="material-symbols-outlined">code</span>
+                        Ver en GitHub
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="docs-main">
+            <div class="docs-container">
+                <div class="docs-breadcrumb">
+                    <span>Documentación</span>
+                    <span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span>
+                    <span class="active">Introducción</span>
+                </div>
+
+                <section id="introduction" class="docs-header">
+                    <h1>Getting Started</h1>
+                    <p>Bienvenido a la documentación oficial de SUA-BCV. Nuestra API proporciona acceso en tiempo real a las tasas de cambio regionales y datos de conversión de moneda en un formato JSON altamente eficiente y optimizado.</p>
+                </section>
+
+                <div class="config-card">
+                    <div class="config-header">Configuración de la API</div>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div class="endpoint-box">
+                            <span class="method-badge">GET</span>
+                            <span style="color: var(--primary); flex: 1;">https://api-sua-bcv.io/v1/</span>
+                            <button class="material-symbols-outlined" style="background:none; border:none; color: var(--text-muted); cursor: pointer;">content_copy</button>
+                        </div>
+                        <div style="display: flex; gap: 12px; font-size: 0.9rem;">
+                            <span style="color: var(--text-muted);">Formato:</span>
+                            <span style="font-family: 'JetBrains Mono'; background: var(--background); padding: 2px 8px; border-radius: 4px;">JSON</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Authentication Section -->
+                <section id="authentication" style="margin-bottom: 80px;">
+                    <h2 class="flex items-center gap-1" style="font-size: 1.75rem; margin-bottom: 24px;">
+                        <span class="material-symbols-outlined" style="color: var(--primary);">key</span>
+                        Autenticación
+                    </h2>
+                    <p style="margin-bottom: 24px;">Para acceder a la API, debes incluir tu clave de API en el encabezado <code style="color: var(--primary); font-family: 'JetBrains Mono';">x-api-key</code> de cada solicitud.</p>
+                    
+                    <div class="alert alert-warning">
+                        <span class="material-symbols-outlined">warning</span>
+                        <div class="alert-content">
+                            <h6>Atención</h6>
+                            <p>Nunca compartas tus claves de API públicamente. Utiliza variables de entorno para almacenarlas de forma segura en tus entornos de producción.</p>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-note">
+                        <span class="material-symbols-outlined">info</span>
+                        <div class="alert-content">
+                            <h6>Nota</h6>
+                            <p>Se aplican límites de tasa: 1,000 solicitudes por minuto para usuarios del nivel gratuito.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SDK Examples -->
+                <section id="javascript" style="margin-bottom: 80px;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Ejemplos de Solicitud</h2>
+                    <div class="snippet-window">
+                        <div class="snippet-tabs">
+                            <div class="tab-btn active" data-lang="js">JavaScript</div>
+                            <div class="tab-btn" data-lang="dart">Dart</div>
+                            <div class="tab-btn" data-lang="python">Python</div>
+                            <div style="margin-left: auto; display: flex; align-items: center; padding-right: 20px;">
+                                <button style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="snippet-content" id="code-display">
+<pre style="color: #94a3b8;"><span style="color: #c084fc;">const</span> response = <span style="color: #c084fc;">await</span> <span style="color: #60a5fa;">fetch</span>(<span style="color: #4ade80;">'https://api-sua-bcv.io/v1/usd'</span>, {
+  <span style="color: #fb923c;">headers</span>: {
+    <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">'TU_API_KEY'</span>,
+    <span style="color: #4ade80;">'Accept'</span>: <span style="color: #4ade80;">'application/json'</span>
+  }
+});
+
+<span style="color: #c084fc;">const</span> data = <span style="color: #c084fc;">await</span> response.<span style="color: #60a5fa;">json</span>();
+<span style="color: #60a5fa;">console</span>.<span style="color: #60a5fa;">log</span>(data);</pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Changelog -->
+                <section id="changelog">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 40px;">Registro de Cambios</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="version-badge">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                    <span style="font-weight: 800; color: white;">v1.0.0</span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">2024-05-20</span>
+                                </div>
+                                <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
+                                    <li>Lanzamiento inicial de la API.</li>
+                                    <li>Migración completa al runtime de Bun para un aumento de rendimiento de 3x.</li>
+                                    <li>Soporte de WebSocket para tasas en tiempo real.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Right Side TOC -->
+        <aside class="toc">
+            <div class="toc-title">En esta página</div>
+            <nav>
+                <a href="#introduction" class="toc-link active">Introducción</a>
+                <a href="#authentication" class="toc-link">Autenticación</a>
+                <a href="#javascript" class="toc-link">Ejemplos de SDK</a>
+                <a href="#changelog" class="toc-link">Changelog</a>
+            </nav>
+            
+            <div style="margin-top: 40px; padding: 20px; background: rgba(0, 208, 255, 0.05); border: 1px solid rgba(0, 208, 255, 0.2); border-radius: 12px;">
+                <h6 style="font-size: 0.75rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; text-transform: uppercase;">¿Necesitas ayuda?</h6>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px;">Nuestro equipo está disponible 24/7 para soporte empresarial.</p>
+                <a href="#" style="font-size: 0.75rem; font-weight: 700; color: var(--primary); text-decoration: underline;">Contactar Soporte →</a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Mobile Navigation (Simple) -->
+    <div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0a0a; border-top: 1px solid var(--card-border); padding: 12px; display: none;" id="mobile-docs-nav">
+        <!-- Would implement a simple mobile menu here -->
+    </div>
+
+    <script src="docs.js"></script>
+</body>
+</html>
