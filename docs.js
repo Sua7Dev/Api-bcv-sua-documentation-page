@@ -59,12 +59,14 @@ const init = async () => {
                         responseArea.innerHTML = `
                             <div class="response-header"><div class="response-title">Error</div></div>
                             <div class="response-body" style="color: #f59e0b;">
-                                <b>Error:</b> Clave de API no disponible.<br>
-                                Genera una clave primero o asegúrate de que el backend esté respondiendo corregidamente.
+                                <b>Error:</b> No tienes una Clave de API configurada.<br><br>
+                                1. Usa el botón <b>Generar Nueva API Key</b> arriba.<br>
+                                2. O asegúrate de que la variable <code>VITE_API_KEY</code> esté configurada en Vercel.
                             </div>`;
                         return;
                     }
                     headers['x-api-key'] = apiKey;
+                    console.warn(`🚀 Enviando petición a ${fullUrl} con x-api-key.`);
                 }
                 
                 const response = await fetch(fullUrl, { headers });
@@ -171,6 +173,11 @@ const init = async () => {
                 const result = await response.json();
 
                 if (!response.ok) throw new Error(result.error || 'Error desconocido');
+
+                // Persistir la nueva llave para pruebas inmediatas
+                if (typeof window.process === 'undefined') window.process = { env: {} };
+                window.process.env.VITE_API_KEY = result.key;
+                console.info('Nueva API Key generada y cargada para pruebas.');
 
                 // Mostrar modal y limpiar estado
                 modalKeyDisplay.innerText = result.key;
