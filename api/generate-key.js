@@ -1,8 +1,15 @@
 import { createClient } from '@libsql/client';
+import { verifySession } from './utils/auth';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+
+  // 1. Verify Authentication
+  const user = verifySession(req);
+  if (!user) {
+    return res.status(401).json({ error: 'Authentication required to generate an API Key' });
   }
 
   const dbUrl = process.env.VITE_DATABASE_URL;
@@ -28,15 +35,16 @@ export default async function handler(req, res) {
     };
 
     const newKey = generateKeyString(32);
-    const name = `Web User ${new Date().toLocaleDateString()}`;
+    // Use the GitHub username as the key name as requested
+    const name = user.name;
     
     // Expiración: 30 días (1 mes)
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 30);
 
     await db.execute({
-      sql: 'INSERT INTO api_keys (name, key, expires_at) VALUES (?, ?, ?)',
-      args: [name, newKey, expiresAt.toISOString()]
+      sql: 'INSERT INTO api_keys (name, key, expires_at, user_id) VALUES (?, ?, ?, ?)',
+      args: [name, newKey, expiresAt.toISOString(), user.github_id]
     });
 
     res.status(200).json({ key: newKey });

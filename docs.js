@@ -41,6 +41,53 @@ const init = async () => {
     // Obtener la API KEY
     const getEnvApiKey = () => window.process?.env?.VITE_API_KEY || '';
 
+    // --- Authentication & Session Logic ---
+    const checkAuth = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token') || localStorage.getItem('session_token');
+
+        if (token) {
+            try {
+                // Clear token from URL for a clean look
+                if (urlParams.has('token')) {
+                    localStorage.setItem('session_token', token);
+                    const newUrl = window.location.pathname + window.location.hash;
+                    window.history.replaceState({}, document.title, newUrl);
+                }
+
+                // Decode JWT payload (base64)
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                
+                // Update UI state
+                const authRequired = document.getElementById('auth-required-ui');
+                const authSuccess = document.getElementById('auth-success-ui');
+                const userProfile = document.getElementById('user-profile');
+                
+                if (authRequired) authRequired.style.display = 'none';
+                if (authSuccess) authSuccess.style.display = 'block';
+                if (userProfile) {
+                    userProfile.style.display = 'block';
+                    document.getElementById('user-name').innerText = payload.name;
+                    document.getElementById('user-avatar').src = payload.avatar_url;
+                }
+
+                return token;
+            } catch (e) {
+                console.error('Sesión inválida:', e);
+                localStorage.removeItem('session_token');
+            }
+        }
+        return null;
+    };
+
+    const sessionToken = checkAuth();
+
+    // Logout logic
+    document.getElementById('logout-btn')?.addEventListener('click', () => {
+        localStorage.removeItem('session_token');
+        window.location.reload();
+    });
+
     // --- Endpoint Testing Logic ---
     const tryButtons = document.querySelectorAll('.btn-try');
     
@@ -209,7 +256,13 @@ const init = async () => {
             `;
 
             try {
-                const response = await fetch('/api/generate-key', { method: 'POST' });
+                const token = localStorage.getItem('session_token');
+                const response = await fetch('/api/generate-key', { 
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 const result = await response.json();
 
                 if (!response.ok) throw new Error(result.error || 'Error desconocido');
@@ -225,7 +278,14 @@ const init = async () => {
 
             } catch (error) {
                 console.error('Error generation:', error);
-                alert('No se pudo generar la API Key. Detalles: ' + error.message);
+                
+                if (error.message.includes('Authentication')) {
+                    alert('Tu sesión ha expirado o es inválida. Por favor inicia sesión de nuevo.');
+                    localStorage.removeItem('session_token');
+                    window.location.reload();
+                } else {
+                    alert('No se pudo generar la API Key. Detalles: ' + error.message);
+                }
             } finally {
                 // Reset button state
                 genKeyBtn.disabled = false;
