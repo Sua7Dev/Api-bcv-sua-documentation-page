@@ -29,9 +29,8 @@
                 </a>
                 <nav style="margin-left: 40px;">
                     <ul class="flex gap-4">
-                        <li><a href="#" class="active" style="color: var(--primary);">Docs</a></li>
-                        <li><a href="#">API Reference</a></li>
-                        <li><a href="#">Support</a></li>
+                        <li><a href="#" class="active" style="color: var(--primary);">Documentación</a></li>
+                        <li><a href="https://github.com/Sua7Dev/api-bcv-sua" target="_blank">GitHub</a></li>
                     </ul>
                 </nav>
             </div>
@@ -39,12 +38,12 @@
             <div class="flex items-center gap-4">
                 <div class="search-bar" style="position: relative;">
                     <span class="material-symbols-outlined" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--text-muted);">search</span>
-                    <input type="text" placeholder="Buscar documentación..." style="background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 16px 10px 40px; color: white; width: 300px; font-size: 0.9rem;">
+                    <input type="text" placeholder="Buscar en la documentación..." style="background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 16px 10px 40px; color: white; width: 300px; font-size: 0.9rem;">
                 </div>
-                <button class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">
-                    <span class="material-symbols-outlined" style="font-size: 18px;">login</span>
-                    Sign In
-                </button>
+                <a href="index.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">home</span>
+                    Volver al Inicio
+                </a>
             </div>
         </div>
     </header>
@@ -70,30 +69,26 @@
                 </div>
 
                 <div class="nav-group">
-                    <h5>SDK & Ejemplos</h5>
-                    <a href="#javascript" class="nav-link">
-                        <span class="material-symbols-outlined">javascript</span>
-                        JavaScript (Bun)
+                    <h5>API Reference</h5>
+                    <a href="#diagnostico" class="nav-link">
+                        <span class="material-symbols-outlined">analytics</span>
+                        Diagnóstico
                     </a>
-                    <a href="#dart" class="nav-link">
-                        <span class="material-symbols-outlined">flutter</span>
-                        Dart (Flutter)
+                    <a href="#venezuela-realtime" class="nav-link">
+                        <span class="material-symbols-outlined">payments</span>
+                        Cotizaciones VZLA
                     </a>
-                    <a href="#python" class="nav-link">
-                        <span class="material-symbols-outlined">terminal</span>
-                        Python (Requests)
+                    <a href="#venezuela-historicos" class="nav-link">
+                        <span class="material-symbols-outlined">history</span>
+                        Históricos VZLA
                     </a>
                 </div>
 
                 <div class="nav-group">
-                    <h5>Comunidad</h5>
-                    <a href="#changelog" class="nav-link">
-                        <span class="material-symbols-outlined">history</span>
-                        Changelog
-                    </a>
-                    <a href="#" class="nav-link">
-                        <span class="material-symbols-outlined">forum</span>
-                        Foro de Soporte
+                    <h5>SDK & Ejemplos</h5>
+                    <a href="#javascript" class="nav-link">
+                        <span class="material-symbols-outlined">javascript</span>
+                        JavaScript (Bun)
                     </a>
                 </div>
 
@@ -116,7 +111,7 @@
                 </div>
 
                 <section id="introduction" class="docs-header">
-                    <h1>Getting Started</h1>
+                    <h1>Comenzando</h1>
                     <p>Bienvenido a la documentación oficial de SUA-BCV. Nuestra API proporciona acceso en tiempo real a las tasas de cambio regionales y datos de conversión de moneda en un formato JSON altamente eficiente y optimizado.</p>
                 </section>
 
@@ -124,9 +119,9 @@
                     <div class="config-header">Configuración de la API</div>
                     <div style="display: flex; flex-direction: column; gap: 16px;">
                         <div class="endpoint-box">
-                            <span class="method-badge">GET</span>
-                            <span style="color: var(--primary); flex: 1;">https://api-sua-bcv.io/v1/</span>
-                            <button class="material-symbols-outlined" style="background:none; border:none; color: var(--text-muted); cursor: pointer;">content_copy</button>
+                            <span class="method-badge">BASE URL</span>
+                            <span style="color: var(--primary); flex: 1;">https://api-bcv-sua.vercel.app</span>
+                            <button class="material-symbols-outlined copy-btn" data-copy="https://api-bcv-sua.vercel.app" style="background:none; border:none; color: var(--text-muted); cursor: pointer;">content_copy</button>
                         </div>
                         <div style="display: flex; gap: 12px; font-size: 0.9rem;">
                             <span style="color: var(--text-muted);">Formato:</span>
@@ -147,36 +142,130 @@
                         <span class="material-symbols-outlined">warning</span>
                         <div class="alert-content">
                             <h6>Atención</h6>
-                            <p>Nunca compartas tus claves de API públicamente. Utiliza variables de entorno para almacenarlas de forma segura en tus entornos de producción.</p>
+                            <p>Todas las rutas <code>/v1/*</code> requieren el encabezado <code>x-api-key: TU_CLAVE</code>. No compartas tus claves públicamente.</p>
                         </div>
                     </div>
+                </section>
 
-                    <div class="alert alert-note">
-                        <span class="material-symbols-outlined">info</span>
-                        <div class="alert-content">
-                            <h6>Nota</h6>
-                            <p>Se aplican límites de tasa: 1,000 solicitudes por minuto para usuarios del nivel gratuito.</p>
+                <!-- Diagnostico -->
+                <section id="diagnostico" style="margin-bottom: 80px;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Diagnóstico</h2>
+                    <p style="margin-bottom: 24px;">Health check para verificar la disponibilidad de la API.</p>
+                    
+                    <div class="endpoints-list">
+                        <div class="endpoint-item">
+                            <span class="method">GET</span>
+                            <span class="path">/ping</span>
+                            <div class="endpoint-info">
+                                <p>Health check del servicio</p>
+                                <button class="btn-try" data-path="/ping">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Probar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Venezuela Realtime -->
+                <section id="venezuela-realtime" style="margin-bottom: 80px;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Venezuela — Cotizaciones en tiempo real</h2>
+                    
+                    <div class="endpoints-list">
+                        <div class="endpoint-item">
+                            <span class="method">GET</span>
+                            <span class="path">/v1/usd</span>
+                            <div class="endpoint-info">
+                                <p>Dólar (BCV + Paralelo)</p>
+                                <button class="btn-try" data-path="/v1/usd">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Probar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="endpoint-item">
+                            <span class="method">GET</span>
+                            <span class="path">/v1/eur</span>
+                            <div class="endpoint-info">
+                                <p>Euro (BCV + Paralelo)</p>
+                                <button class="btn-try" data-path="/v1/eur">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Probar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="endpoint-item">
+                            <span class="method">GET</span>
+                            <span class="path">/v1/cotizaciones</span>
+                            <div class="endpoint-info">
+                                <p>Todas las cotizaciones</p>
+                                <button class="btn-try" data-path="/v1/cotizaciones">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Probar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="endpoint-item">
+                            <span class="method">GET</span>
+                            <span class="path">/v1/estado</span>
+                            <div class="endpoint-info">
+                                <p>Estado y última actualización</p>
+                                <button class="btn-try" data-path="/v1/estado">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Probar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Venezuela Historicos -->
+                <section id="venezuela-historicos" style="margin-bottom: 80px;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Venezuela — Históricos</h2>
+                    
+                    <div class="endpoints-list">
+                        <div class="endpoint-item">
+                            <span class="method">GET</span>
+                            <span class="path">/v1/historicos/dolares</span>
+                            <div class="endpoint-info">
+                                <p>Histórico completo Dólar</p>
+                                <button class="btn-try" data-path="/v1/historicos/dolares">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Probar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="endpoint-item">
+                            <span class="method">GET</span>
+                            <span class="path">/v1/historicos/euros</span>
+                            <div class="endpoint-info">
+                                <p>Histórico completo Euro</p>
+                                <button class="btn-try" data-path="/v1/historicos/euros">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Probar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 <!-- SDK Examples -->
                 <section id="javascript" style="margin-bottom: 80px;">
-                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Ejemplos de Solicitud</h2>
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Ejemplos de Consumo</h2>
                     <div class="snippet-window">
                         <div class="snippet-tabs">
-                            <div class="tab-btn active" data-lang="js">JavaScript</div>
-                            <div class="tab-btn" data-lang="dart">Dart</div>
+                            <div class="tab-btn active" data-lang="js">JavaScript (Bun)</div>
+                            <div class="tab-btn" data-lang="dart">Dart (Flutter)</div>
                             <div class="tab-btn" data-lang="python">Python</div>
                             <div style="margin-left: auto; display: flex; align-items: center; padding-right: 20px;">
-                                <button style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                                <button class="copy-code-btn" style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; align-items: center; gap: 4px; cursor: pointer;">
                                     <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
                                     Copiar
                                 </button>
                             </div>
                         </div>
                         <div class="snippet-content" id="code-display">
-<pre style="color: #94a3b8;"><span style="color: #c084fc;">const</span> response = <span style="color: #c084fc;">await</span> <span style="color: #60a5fa;">fetch</span>(<span style="color: #4ade80;">'https://api-sua-bcv.io/v1/usd'</span>, {
+<pre style="color: #94a3b8;"><span style="color: #c084fc;">const</span> response = <span style="color: #c084fc;">await</span> <span style="color: #60a5fa;">fetch</span>(<span style="color: #4ade80;">'https://api-bcv-sua.vercel.app/v1/usd'</span>, {
   <span style="color: #fb923c;">headers</span>: {
     <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">'TU_API_KEY'</span>,
     <span style="color: #4ade80;">'Accept'</span>: <span style="color: #4ade80;">'application/json'</span>
@@ -203,7 +292,7 @@
                                 <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
                                     <li>Lanzamiento inicial de la API.</li>
                                     <li>Migración completa al runtime de Bun para un aumento de rendimiento de 3x.</li>
-                                    <li>Soporte de WebSocket para tasas en tiempo real.</li>
+                                    <li>Optimización de caché con Upstash Redis.</li>
                                 </ul>
                             </div>
                         </div>
@@ -218,21 +307,13 @@
             <nav>
                 <a href="#introduction" class="toc-link active">Introducción</a>
                 <a href="#authentication" class="toc-link">Autenticación</a>
-                <a href="#javascript" class="toc-link">Ejemplos de SDK</a>
+                <a href="#diagnostico" class="toc-link">Diagnóstico</a>
+                <a href="#venezuela-realtime" class="toc-link">Cotizaciones</a>
+                <a href="#venezuela-historicos" class="toc-link">Históricos</a>
+                <a href="#javascript" class="toc-link">Ejemplos</a>
                 <a href="#changelog" class="toc-link">Changelog</a>
             </nav>
-            
-            <div style="margin-top: 40px; padding: 20px; background: rgba(0, 208, 255, 0.05); border: 1px solid rgba(0, 208, 255, 0.2); border-radius: 12px;">
-                <h6 style="font-size: 0.75rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; text-transform: uppercase;">¿Necesitas ayuda?</h6>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px;">Nuestro equipo está disponible 24/7 para soporte empresarial.</p>
-                <a href="#" style="font-size: 0.75rem; font-weight: 700; color: var(--primary); text-decoration: underline;">Contactar Soporte →</a>
-            </div>
         </aside>
-    </div>
-
-    <!-- Mobile Navigation (Simple) -->
-    <div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0a0a; border-top: 1px solid var(--card-border); padding: 12px; display: none;" id="mobile-docs-nav">
-        <!-- Would implement a simple mobile menu here -->
     </div>
 
     <script src="docs.js"></script>
