@@ -321,103 +321,112 @@ section {
     max-width: 500px;
 }
 
-/* Code Preview */
-.code-window {
-    background: #0f172a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
+/* --- Code Highlighting (Stitch Style) --- */
+.code-card {
+    background: #0b1120;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    position: relative;
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
 }
 
 .code-header {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 12px 16px;
+    background: #111827;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.dots {
+    display: flex;
     gap: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
 }
 
-.dot.red { background: #ff5f56; }
-.dot.yellow { background: #ffbd2e; }
-.dot.green { background: #27c93f; }
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
 
-.code-filename {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-left: 8px;
+.tab {
+    margin-left: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #4b5563;
+    letter-spacing: 0.02em;
 }
 
-.code-content {
-    padding: 24px;
+.code-body {
+    padding: 30px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
-    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.7;
 }
 
-.code-content .keyword { color: var(--primary); }
-.code-content .string { color: #10b981; }
-.code-content .comment { color: #64748b; font-style: italic; }
-.code-content .indent { padding-left: 20px; }
+.code-keyword { color: #38bdf8; }
+.code-func { color: #38bdf8; }
+.code-string { color: #4ade80; }
+.code-key { color: #38bdf8; }
+.code-val { color: #4ade80; }
+.code-comment { color: #64748b; }
 
-.code-output {
-    margin-top: 20px;
-    background: rgba(16, 185, 129, 0.05);
+.code-output-block {
+    margin-top: 24px;
+    background: #111827;
     border-radius: 8px;
     padding: 16px;
-    color: #10b981;
-    border: 1px solid rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.05);
 }
 
-/* Features Section */
-.features {
-    background: var(--background-darker);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+/* --- Features (Stitch Style) --- */
+.feature-card {
+    background: #162226;
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
 }
 
-.section-header {
-    text-align: center;
-    margin-bottom: 64px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+.feature-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 208, 255, 0.2);
+    box-shadow: 0 20px 40px -10px rgba(0, 208, 255, 0.1);
 }
 
-.section-header h2 {
-    font-size: 2.5rem;
-    color: var(--white);
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-}
-
-.feature-icon {
-    width: 48px;
-    height: 48px;
-    background: rgba(0, 208, 255, 0.1);
+.feature-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 208, 255, 0.08);
     color: var(--primary);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
-.feature-icon .material-symbols-outlined {
+.feature-icon-wrapper .material-symbols-outlined {
     font-size: 24px;
+}
+
+.feature-card h3 {
+    font-size: 1.4rem;
+    color: var(--white);
+    margin-bottom: 16px;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
 }
 
 /* Endpoints Section */

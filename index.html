@@ -21,8 +21,6 @@
 </head>
 <body class="bg-background text-main">
 
-
-
     <main>
         <!-- Hero Section -->
         <section class="hero glass-gradient">
@@ -48,26 +46,31 @@
                 <div class="hero-visual">
                     <div class="code-card">
                         <div class="code-header">
-                            <div class="dots"><span></span><span></span><span></span></div>
+                            <div class="dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
                             <div class="tab">example.js</div>
                         </div>
                         <div class="code-body">
-                            <pre><code><span class="keyword">const</span> respuesta = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'https://api-bcv-sua.vercel.app/v1/usd'</span>, {
-  <span class="keyword">headers</span>: { <span class="string">'x-api-key'</span>: <span class="string">'TU_CLAVE_SECRETA'</span> }
-})
-<span class="keyword">const</span> datos = <span class="keyword">await</span> respuesta.<span style="color: var(--primary);">json</span>()
+<pre><code><span class="code-keyword">const</span> response = <span class="code-keyword">await</span> <span class="code-func">fetch</span>(<span class="code-string">'https://api-bcv-sua.vercel.app/v1/usd'</span>, {
+  <span class="code-key">headers</span>: { <span class="code-string">'x-api-key'</span>: <span class="code-string">'YOUR_API_KEY'</span> }
+});
 
-<span class="comment">// Output:</span>
-[
-  {
-    <span class="key">"fuente"</span>: <span class="string">"oficial"</span>,
-    <span class="key">"nombre"</span>: <span class="string">"Oficial"</span>,
-    <span class="key">"valor"</span>: <span class="number">445.20</span>,
-    <span class="key">"fechaActualizacion"</span>: <span class="string">"..."</span>,
-    <span class="key">"valorAnterior"</span>: <span class="number">443.10</span>,
-    <span class="key">"fechaAnterior"</span>: <span class="string">"..."</span>
-  }
-]</code></pre>
+<span class="code-keyword">const</span> data = <span class="code-keyword">await</span> response.<span class="code-func">json</span>();
+
+<span class="code-func">console</span>.<span class="code-func">log</span>(data);
+
+<div class="code-output-block"><span class="code-comment">// Output:</span>
+{
+  <span class="code-key">"fuente"</span>: <span class="code-val">Oficial</span>,
+  <span class="code-key">"nombre"</span>: <span class="code-string">"Oficial"</span>,
+  <span class="code-key">"valor"</span>: <span class="code-string">"445.20"</span>,
+  <span class="code-key">"fechaActualizacion"</span>: <span class="code-string">"..."</span>,
+  <span class="code-key">"valorAnterior"</span>: <span class="code-string">"..."</span>,
+  <span class="code-key">"fechaAnterior"</span>: <span class="code-string">"..."</span>
+}</div></code></pre>
                         </div>
                     </div>
                 </div>
@@ -82,26 +85,26 @@
                     <p>Infraestructura moderna para aplicaciones de alto tráfico.</p>
                 </div>
                 <div class="grid grid-3 gap-8">
-                    <div class="feature-card group">
-                        <div class="feature-icon border-primary/20 bg-primary/10 text-primary">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
                             <span class="material-symbols-outlined">bolt</span>
                         </div>
                         <h3>Ultra Rápida</h3>
-                        <p>Bun runtime & Vercel Edge para una latencia global mínima. Respuestas en milisegundos.</p>
+                        <p>Bun runtime & Vercel Edge para una latencia global mínima. Respuestas en milisegundos desde cualquier lugar.</p>
                     </div>
-                    <div class="feature-card group">
-                        <div class="feature-icon border-primary/20 bg-primary/10 text-primary">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
                             <span class="material-symbols-outlined">security</span>
                         </div>
                         <h3>Segura</h3>
-                        <p>Gestión avanzada de API Keys y rate limiting optimizado para proteger tus endpoints.</p>
+                        <p>Gestión avanzada de API Keys con rotación automática, gestión de vencimiento y rate limiting por aplicación.</p>
                     </div>
-                    <div class="feature-card group">
-                        <div class="feature-icon border-primary/20 bg-primary/10 text-primary">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
                             <span class="material-symbols-outlined">cloud_sync</span>
                         </div>
                         <h3>Confiable</h3>
-                        <p>Sincronización automática vía Upstash Redis para alta disponibilidad de los datos del BCV.</p>
+                        <p>Sincronización automática vía Upstash Redis para alta disponibilidad y consistencia de datos oficial del BCV.</p>
                     </div>
                 </div>
             </div>
