@@ -312,7 +312,7 @@ section {
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-hero { 
-    grid-template-columns: 1fr 80px 460px; /* El texto toma el resto, el código se queda en 460px */
+    grid-template-columns: 1fr 1px 630px; /* El texto toma el resto, el código se queda en 460px */
     width: 100%;
 }
 @media (max-width: 1024px) {
