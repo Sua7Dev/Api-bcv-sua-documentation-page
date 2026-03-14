@@ -8,10 +8,24 @@ await dotenv.config();
  * Script de Documentación Sua-BCV
  * Maneja el testing de endpoints y la generación de API Keys.
  */
-document.addEventListener('DOMContentLoaded', () => {
+const init = async () => {
+    // Asegurar que window.process existe
+    if (typeof window.process === 'undefined') window.process = { env: {} };
+
     const BASE_URL = 'https://api-bcv-sua.vercel.app';
     
-    // Obtener la API KEY del .env (desde window.process.env cargado por el shim)
+    // Intentar cargar configuración desde el backend si no estamos local con .env
+    try {
+        const configRes = await fetch('/api/config');
+        if (configRes.ok) {
+            const config = await configRes.json();
+            window.process.env.VITE_API_KEY = config.VITE_API_KEY;
+        }
+    } catch (e) {
+        console.warn('No se pudo cargar config desde /api/config, usando fallback local si existe.');
+    }
+
+    // Obtener la API KEY
     const getEnvApiKey = () => window.process?.env?.VITE_API_KEY || '';
 
     // --- Endpoint Testing Logic ---
@@ -45,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         responseArea.innerHTML = `
                             <div class="response-header"><div class="response-title">Error</div></div>
                             <div class="response-body" style="color: #f59e0b;">
-                                <b>Error:</b> VITE_API_KEY no encontrada.<br>
-                                Asegúrate de estar ejecutando la app a través de un servidor (http://localhost) y que el archivo .env exista.
+                                <b>Error:</b> Clave de API no disponible.<br>
+                                Genera una clave primero o asegúrate de que el backend esté respondiendo corregidamente.
                             </div>`;
                         return;
                     }
@@ -137,27 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const genKeyBtn = document.getElementById('generate-key-btn');
 
     if (genKeyBtn) {
-        function generateKeyString(length = 32) {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@$&';
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
-        }
-
         genKeyBtn.addEventListener('click', async () => {
             const originalContent = genKeyBtn.innerHTML;
             
-            // Re-verificar variables de DB
-            const dbUrl = window.process?.env?.VITE_DATABASE_URL;
-            const dbToken = window.process?.env?.VITE_DATABASE_AUTH_TOKEN;
-
-            if (!dbUrl || !dbToken) {
-                alert('No se encontraron las credenciales de la base de datos en el .env (VITE_DATABASE_URL / VITE_DATABASE_AUTH_TOKEN)');
-                return;
-            }
-
             // Loading state
             genKeyBtn.disabled = true;
             genKeyBtn.innerHTML = `
@@ -166,34 +162,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         <style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
                         <path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" fill="white" opacity=".25"/><path d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z" fill="white"/>
                     </svg>
-                    Generando Credenciales...
+                    Generando a través de API...
                 </div>
             `;
 
             try {
-                const db = createClient({
-                    url: dbUrl,
-                    authToken: dbToken,
-                });
+                const response = await fetch('/api/generate-key', { method: 'POST' });
+                const result = await response.json();
 
-                const newKey = generateKeyString(32);
-                const name = `Web User ${new Date().toLocaleDateString()}`;
-                
-                // Expiración: 30 días (1 mes)
-                const expiresAt = new Date();
-                expiresAt.setDate(expiresAt.getDate() + 30);
-
-                await db.execute({
-                    sql: 'INSERT INTO api_keys (name, key, expires_at) VALUES (?, ?, ?)',
-                    args: [name, newKey, expiresAt.toISOString()]
-                });
+                if (!response.ok) throw new Error(result.error || 'Error desconocido');
 
                 // Mostrar modal y limpiar estado
-                modalKeyDisplay.innerText = newKey;
+                modalKeyDisplay.innerText = result.key;
                 modal.showModal();
 
             } catch (error) {
-                console.error('Error db:', error);
+                console.error('Error generation:', error);
                 alert('No se pudo generar la API Key. Detalles: ' + error.message);
             } finally {
                 // Reset button state
@@ -224,6 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         sections.forEach(s => observer.observe(s));
     }
-});
+};
+
+// Ejecución con manejo de estado de carga
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
 
 

@@ -1,0 +1,9 @@
+{
+  "name": "sua-bcv-landing",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@libsql/client": "^0.17.0",
+    "dotenv": "^16.4.5"
+  }
+}
