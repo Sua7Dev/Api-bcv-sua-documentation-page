@@ -18,6 +18,7 @@ const init = async () => {
     if (typeof window.process === 'undefined') window.process = { env: {} };
 
     const BASE_URL = 'https://api-bcv-sua.vercel.app';
+    const PROXY_BASE = '/api/proxy'; // Evita CORS: la petición autenticada sale del servidor
     
     // Cargar API key desde el servidor (donde está la variable de entorno VITE_API_KEY)
     try {
@@ -64,26 +65,20 @@ const init = async () => {
             const startTime = performance.now();
             
             try {
-                const headers = { 'Accept': 'application/json' };
+                let fetchUrl;
+                const fetchHeaders = { 'Accept': 'application/json' };
+
                 if (path.startsWith('/v1/')) {
-                    const apiKey = getEnvApiKey();
-                    if (!apiKey) {
-                        responseArea.innerHTML = `
-                            <div class="response-header"><div class="response-title">Sin API Key</div></div>
-                            <div class="response-body" style="color: #f59e0b;">
-                                <b>No se encontró una Clave de API.</b><br><br>
-                                Opciones:<br>
-                                1. Usa el botón <b>Generar Nueva API Key</b> arriba para obtener una clave temporal.<br>
-                                2. Verifica que la variable <code>VITE_API_KEY</code> esté configurada en los ajustes de tu proyecto en Vercel.<br><br>
-                                <small style="opacity:0.7;">El servidor respondió con una clave vacía desde <code>/api/config</code>.</small>
-                            </div>`;
-                        return;
-                    }
-                    headers['x-api-key'] = apiKey;
-                    console.info(`🚀 Enviando petición a ${fullUrl} con x-api-key (${apiKey.length} chars).`);
+                    // Usar el proxy server-side para evitar CORS y manejar la x-api-key de forma segura
+                    fetchUrl = `${PROXY_BASE}?path=${encodeURIComponent(path)}`;
+                    console.info(`🚀 Enviando petición a través del proxy: ${fetchUrl}`);
+                } else {
+                    // Rutas públicas: llamada directa
+                    fetchUrl = `${BASE_URL}${path}`;
+                    console.info(`🚀 Enviando petición directa: ${fetchUrl}`);
                 }
-                
-                const response = await fetch(fullUrl, { headers });
+
+                const response = await fetch(fetchUrl, { headers: fetchHeaders });
                 const endTime = performance.now();
                 const duration = (endTime - startTime).toFixed(2);
                 
