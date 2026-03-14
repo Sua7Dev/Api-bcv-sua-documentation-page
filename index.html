@@ -25,7 +25,7 @@
         <div class="container flex items-center justify-between">
             <a href="#" class="logo">
                 <div class="logo-icon">
-                    <span class="material-symbols-outlined">api</span>
+                    <span class="material-symbols-outlined">currency_exchange</span>
                 </div>
                 API SUA-BCV
             </a>
@@ -37,7 +37,6 @@
                 </ul>
             </nav>
             <div class="flex items-center gap-4">
-                <button class="btn btn-ghost">Login</button>
                 <a href="docs.html" class="btn btn-primary">Empezar ahora</a>
             </div>
         </div>
@@ -72,18 +71,22 @@
                             <div class="tab">example.js</div>
                         </div>
                         <div class="code-body">
-                            <pre><code><span class="keyword">const</span> response = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'https://api-bcv-sua.../v1/usd'</span>, {
-  <span class="keyword">headers</span>: { <span class="string">'x-api-key'</span>: <span class="string">'YOUR_API_KEY'</span> }
-});
-
-<span class="keyword">const</span> data = <span class="keyword">await</span> response.<span style="color: var(--primary);">json</span>();
+                            <pre><code><span class="keyword">const</span> respuesta = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'https://api-bcv-sua.vercel.app/v1/usd'</span>, {
+  <span class="keyword">headers</span>: { <span class="string">'x-api-key'</span>: <span class="string">'TU_CLAVE_SECRETA'</span> }
+})
+<span class="keyword">const</span> datos = <span class="keyword">await</span> respuesta.<span style="color: var(--primary);">json</span>()
 
 <span class="comment">// Output:</span>
-{
-  <span class="key">"fuente"</span>: <span class="string text-emerald-400">"oficial"</span>,
-  <span class="key">"valor"</span>: <span class="number">446.80</span>,
-  <span class="key">"moneda"</span>: <span class="string">"USD"</span>
-}</code></pre>
+[
+  {
+    <span class="key">"fuente"</span>: <span class="string">"oficial"</span>,
+    <span class="key">"nombre"</span>: <span class="string">"Oficial"</span>,
+    <span class="key">"valor"</span>: <span class="number">445.20</span>,
+    <span class="key">"fechaActualizacion"</span>: <span class="string">"..."</span>,
+    <span class="key">"valorAnterior"</span>: <span class="number">443.10</span>,
+    <span class="key">"fechaAnterior"</span>: <span class="string">"..."</span>
+  }
+]</code></pre>
                         </div>
                     </div>
                 </div>
@@ -132,8 +135,14 @@
                 <div class="endpoints-stack">
                     <div class="endpoint-row">
                         <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/ping</code>
+                        <span class="endpoint-desc">Health check del servicio</span>
+                        <div class="status-dot online"></div>
+                    </div>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
                         <code class="endpoint-path">/v1/usd</code>
-                        <span class="endpoint-desc">Tasa oficial Dólar BCV</span>
+                        <span class="endpoint-desc">Tasa oficial Dólar BCV + Paralelo</span>
                         <div class="status-dot online"></div>
                     </div>
                     <div class="endpoint-row">
@@ -142,10 +151,29 @@
                         <span class="endpoint-desc">Tasa oficial Euro BCV</span>
                         <div class="status-dot online"></div>
                     </div>
-                    <div class="endpoint-row upcoming">
-                        <span class="method-tag disabled">GET</span>
-                        <code class="endpoint-path">/v1/historicos</code>
-                        <span class="endpoint-desc italic">Próximamente</span>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/cotizaciones</code>
+                        <span class="endpoint-desc">Todas las tasas disponibles</span>
+                        <div class="status-dot online"></div>
+                    </div>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/estado</code>
+                        <span class="endpoint-desc">Estado de sincronización</span>
+                        <div class="status-dot online"></div>
+                    </div>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/historicos/dolares</code>
+                        <span class="endpoint-desc">Histórico completo (USD)</span>
+                        <div class="status-dot online"></div>
+                    </div>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/historicos/euros</code>
+                        <span class="endpoint-desc">Histórico completo (EUR)</span>
+                        <div class="status-dot online"></div>
                     </div>
                 </div>
             </div>
@@ -158,8 +186,8 @@
                     <h2 class="text-4xl font-black text-white">¿Listo para construir el futuro?</h2>
                     <p>Únete a cientos de desarrolladores que ya están integrando datos cambiarios confiables.</p>
                     <div class="cta-actions">
-                        <a href="docs.html" class="btn btn-primary px-10">Crear cuenta gratis</a>
-                        <a href="docs.html" class="btn btn-secondary px-10">Leer documentación</a>
+                        <a href="docs.html" class="btn btn-primary px-10">Explorar Documentación</a>
+                        <a href="https://github.com/Sua7Dev/api-bcv-sua" target="_blank" class="btn btn-secondary px-10">Ver en GitHub</a>
                     </div>
                 </div>
             </div>
@@ -180,9 +208,9 @@
                 </div>
                 <div class="footer-links">
                     <h4>Producto</h4>
-                    <a href="#">Características</a>
+                    <a href="#features">Características</a>
                     <a href="docs.html">Documentación</a>
-                    <a href="#">GitHub</a>
+                    <a href="https://github.com/Sua7Dev/api-bcv-sua">GitHub</a>
                 </div>
             </div>
             <div class="footer-bottom">
