@@ -15,6 +15,32 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Browser Compatibility Shim -->
+    <script type="importmap">
+    {
+        "imports": {
+            "dotenv": "./dotenv.js",
+            "@libsql/client": "https://esm.sh/@libsql/client/web"
+        }
+    }
+    </script>
+    <script>
+        // Detector de protocolo file://
+        if (window.location.protocol === 'file:') {
+            console.error('ERROR: La documentación no funcionará correctamente cargada desde el disco (file://).');
+            document.addEventListener('DOMContentLoaded', () => {
+                const warning = document.createElement('div');
+                warning.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; right: 0; background: #ea580c; color: white; padding: 12px; text-align: center; z-index: 9999; font-weight: bold; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                        ⚠️ ATENCIÓN: Estás abriendo la documentación desde el disco. Los botones de probar y generar keys NO funcionarán debido a restricciones del navegador. 
+                        Usa el archivo 'start-server.bat' para abrirla correctamente.
+                    </div>
+                `;
+                document.body.prepend(warning);
+            });
+        }
+    </script>
 </head>
 <body class="bg-background text-main">
     <div class="docs-layout">

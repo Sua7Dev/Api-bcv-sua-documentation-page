@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
 import { createClient } from '@libsql/client';
 
-dotenv.config();
+// Cargar variables de entorno antes de continuar
+await dotenv.config();
 
 /**
  * Script de Documentación Sua-BCV
@@ -10,8 +11,8 @@ dotenv.config();
 document.addEventListener('DOMContentLoaded', () => {
     const BASE_URL = 'https://api-bcv-sua.vercel.app';
     
-    // La API KEY del entorno siempre está disponible para pruebas locales
-    const ENV_API_KEY = process.env.VITE_API_KEY || '';
+    // Obtener la API KEY del .env (desde window.process.env cargado por el shim)
+    const getEnvApiKey = () => window.process?.env?.VITE_API_KEY || '';
 
     // --- Endpoint Testing Logic ---
     const tryButtons = document.querySelectorAll('.btn-try');
@@ -39,12 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const headers = { 'Accept': 'application/json' };
                 if (path.startsWith('/v1/')) {
-                    // Siempre usamos la KEY del .env para las pruebas como solicitado
-                    if (!ENV_API_KEY) {
-                        responseArea.innerHTML = `<div class="response-body" style="color: #f59e0b;">Error: VITE_API_KEY no encontrada en el entorno.</div>`;
+                    const apiKey = getEnvApiKey();
+                    if (!apiKey) {
+                        responseArea.innerHTML = `
+                            <div class="response-header"><div class="response-title">Error</div></div>
+                            <div class="response-body" style="color: #f59e0b;">
+                                <b>Error:</b> VITE_API_KEY no encontrada.<br>
+                                Asegúrate de estar ejecutando la app a través de un servidor (http://localhost) y que el archivo .env exista.
+                            </div>`;
                         return;
                     }
-                    headers['x-api-key'] = ENV_API_KEY;
+                    headers['x-api-key'] = apiKey;
                 }
                 
                 const response = await fetch(fullUrl, { headers });
@@ -78,36 +84,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Copy Logic ---
-    function handleCopy(text, btn) {
+    // --- Utility: Copy Logic ---
+    window.handleCopy = (text, element) => {
         if (!text) return;
         navigator.clipboard.writeText(text).then(() => {
-            const originalHtml = btn.innerHTML;
-            const isMaterialIcon = btn.classList.contains('material-symbols-outlined');
-            
-            if (isMaterialIcon) {
-                btn.innerHTML = 'done';
+            const originalContent = element.innerHTML;
+            if (element.classList.contains('material-symbols-outlined')) {
+                element.innerText = 'done';
             } else {
-                btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 16px;">done</span> Copiado';
+                element.innerHTML = '<span class="material-symbols-outlined" style="font-size: 16px;">done</span> Copiado';
             }
-            
             setTimeout(() => {
-                btn.innerHTML = originalHtml;
+                if (element.classList.contains('material-symbols-outlined')) {
+                    element.innerText = 'content_copy';
+                } else {
+                    element.innerHTML = originalContent;
+                }
             }, 2000);
         });
-    }
+    };
 
-    const copyBtns = document.querySelectorAll('.copy-btn, .copy-code-btn');
-    copyBtns.forEach(btn => {
+    // Global copy buttons
+    document.querySelectorAll('.copy-btn, .copy-code-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             let text = '';
             if (btn.classList.contains('copy-btn')) {
                 text = btn.getAttribute('data-copy');
             } else {
                 const snippet = btn.closest('.snippet-window');
-                if (snippet) {
-                    text = snippet.querySelector('pre').innerText;
-                }
+                if (snippet) text = snippet.querySelector('pre').innerText;
             }
             handleCopy(text, btn);
         });
@@ -115,16 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Modal Logic ---
     const modal = document.getElementById('api-key-modal');
-    const closeButtons = document.querySelectorAll('.close-modal');
     const modalKeyDisplay = document.getElementById('modal-api-key');
     const modalCopyBtn = document.getElementById('modal-copy-btn');
 
     if (modal) {
-        closeButtons.forEach(btn => {
+        document.querySelectorAll('.close-modal').forEach(btn => {
             btn.addEventListener('click', () => modal.close());
         });
 
-        modalCopyBtn.addEventListener('click', () => {
+        modalCopyBtn?.addEventListener('click', () => {
             handleCopy(modalKeyDisplay.innerText, modalCopyBtn);
         });
     }
@@ -143,14 +147,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         genKeyBtn.addEventListener('click', async () => {
-            // Loading state
             const originalContent = genKeyBtn.innerHTML;
+            
+            // Re-verificar variables de DB
+            const dbUrl = window.process?.env?.VITE_DATABASE_URL;
+            const dbToken = window.process?.env?.VITE_DATABASE_AUTH_TOKEN;
+
+            if (!dbUrl || !dbToken) {
+                alert('No se encontraron las credenciales de la base de datos en el .env (VITE_DATABASE_URL / VITE_DATABASE_AUTH_TOKEN)');
+                return;
+            }
+
+            // Loading state
             genKeyBtn.disabled = true;
             genKeyBtn.innerHTML = `
                 <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="animation: spin 1s linear infinite;">
+                    <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="animation: spin 1s linear infinite;">
                         <style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
-                        <path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"/>
+                        <path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" fill="white" opacity=".25"/><path d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z" fill="white"/>
                     </svg>
                     Generando Credenciales...
                 </div>
@@ -158,30 +172,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 const db = createClient({
-                    url: process.env.VITE_DATABASE_URL,
-                    authToken: process.env.VITE_DATABASE_AUTH_TOKEN,
+                    url: dbUrl,
+                    authToken: dbToken,
                 });
 
                 const newKey = generateKeyString(32);
                 const name = `Web User ${new Date().toLocaleDateString()}`;
                 
+                // Expiración: 30 días (1 mes)
                 const expiresAt = new Date();
-                expiresAt.setMonth(expiresAt.getMonth() + 1);
+                expiresAt.setDate(expiresAt.getDate() + 30);
 
                 await db.execute({
                     sql: 'INSERT INTO api_keys (name, key, expires_at) VALUES (?, ?, ?)',
                     args: [name, newKey, expiresAt.toISOString()]
                 });
 
-                // Show modal
+                // Mostrar modal y limpiar estado
                 modalKeyDisplay.innerText = newKey;
                 modal.showModal();
 
             } catch (error) {
                 console.error('Error db:', error);
-                alert('No se pudo conectar con la base de datos. Verifica tu conexión.');
+                alert('No se pudo generar la API Key. Detalles: ' + error.message);
             } finally {
-                // Reset button
+                // Reset button state
                 genKeyBtn.disabled = false;
                 genKeyBtn.innerHTML = originalContent;
             }
