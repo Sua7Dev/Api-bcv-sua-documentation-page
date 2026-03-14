@@ -88,7 +88,7 @@ const init = async () => {
                         <div class="response-header">
                             <div class="response-title">Error HTTP ${response.status}</div>
                             <div class="response-meta">
-                                <span class="status-badge" style="background: #f87171;">Error</span>
+                                <span class="status-badge" style="background: #fef2f2; color: #991b1b; border: 1px solid #fee2e2;">Error</span>
                                 <span class="time-badge">${duration}ms</span>
                             </div>
                         </div>
@@ -104,7 +104,7 @@ const init = async () => {
                             Respuesta
                         </div>
                         <div class="response-meta">
-                            <span class="status-badge" style="background: #10b981;">${response.status} OK</span>
+                            <span class="status-badge" style="background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; font-weight: 600;">${response.status} OK</span>
                             <span class="time-badge">Tiempo: ${duration}ms</span>
                         </div>
                     </div>
