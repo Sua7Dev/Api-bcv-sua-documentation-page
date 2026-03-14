@@ -73,13 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Header scroll background
     const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.backgroundColor = 'rgba(11, 18, 21, 0.95)';
-            header.style.padding = '10px 0';
-        } else {
-            header.style.backgroundColor = 'rgba(11, 18, 21, 0.8)';
-            header.style.padding = '20px 0';
-        }
-    });
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(11, 18, 21, 0.95)';
+                header.style.padding = '10px 0';
+            } else {
+                header.style.backgroundColor = 'rgba(11, 18, 21, 0.8)';
+                header.style.padding = '20px 0';
+            }
+        });
+    }
 });

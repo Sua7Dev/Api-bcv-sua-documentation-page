@@ -47,3 +47,12 @@ Asegurar que las llamadas a la base de datos sean seguras y prevengan inyeccione
 Mantener el archivo index.html y los archivos de las vistas limpios, delegando la lógica a archivos .js externos si es posible.
 
 # 5. Usa siempre bun como runtime de javascript
+
+# 6. diseño response
+
+tanto para pantallas grandes de pc (24"), como pantallas de laptop (15"), como pantallas de tablet (10") y pantallas de celular (6.6").
+en celulares en la vista de documentacion En esta página no debe verse, y el lado de General debe verse como un menu lateral.
+
+# 7. Actualizacion de README.md
+
+actualiza el archivo README.md cada vez que ocurra un cambio en el proyecto significante para documentarlo

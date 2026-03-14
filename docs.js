@@ -88,6 +88,27 @@ const init = async () => {
         window.location.reload();
     });
 
+    // --- Mobile Navigation ---
+    const mobileToggle = document.getElementById('mobile-nav-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    const toggleMobileMenu = () => {
+        sidebar?.classList.toggle('active');
+        overlay?.classList.toggle('active');
+        document.body.style.overflow = sidebar?.classList.contains('active') ? 'hidden' : '';
+    };
+
+    mobileToggle?.addEventListener('click', toggleMobileMenu);
+    overlay?.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking links on mobile
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) toggleMobileMenu();
+        });
+    });
+
     // --- Endpoint Testing Logic ---
     const tryButtons = document.querySelectorAll('.btn-try');
     
