@@ -41,6 +41,12 @@ Para garantizar la estabilidad del servicio, la generación de API Keys requiere
 
 ## 📝 Changelog
 
+### v1.3.1 (Marzo 2026) - UI & Responsiveness Fix
+- **Floating Auth**: Rediseño del botón de login como un chip flotante en la esquina superior derecha.
+- **Responsividad Crítica**: Mejoras en media queries para PC, Laptop, Tablet y Móvil.
+- **UX en Documentación**: Añadida sección de "Endpoints" y mejoras de contraste en botones de GitHub.
+- **Side Menu**: Transformación del sidebar en un menú lateral (drawer) para dispositivos móviles.
+
 ### v1.3.0 (Marzo 2026) - El Update de Seguridad
 - **Sistema de Autenticación**: Integración completa de GitHub OAuth.
 - **Base de Datos**: Migración a Turso para gestión de usuarios y API Keys persistentes.
