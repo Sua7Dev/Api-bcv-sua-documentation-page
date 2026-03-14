@@ -119,12 +119,32 @@
                     </h2>
                     <p style="margin-bottom: 24px;">Para acceder a la API, debes incluir tu clave de API en el encabezado <code style="color: var(--primary); font-family: 'JetBrains Mono';">x-api-key</code> de cada solicitud.</p>
                     
-                    <div class="config-card" style="background: rgba(0, 208, 255, 0.03); border-color: rgba(0, 208, 255, 0.1);">
-                        <div class="config-header" style="color: var(--primary);">Prueba la API (Local)</div>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Ingresa tu API Key para habilitar los botones "Probar":</p>
-                        <div class="flex gap-2">
-                            <input type="password" id="api-key-input" placeholder="Tu API Key" style="background: rgba(0,0,0,0.2); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 16px; color: white; flex: 1; font-family: 'JetBrains Mono'; font-size: 0.9rem;">
-                            <button id="save-key-btn" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem;">Guardar Key</button>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+                        <div class="config-card" style="background: rgba(0, 208, 255, 0.03); border-color: rgba(0, 208, 255, 0.1); margin-bottom: 0;">
+                            <div class="config-header" style="color: var(--primary);">Prueba la API (Local)</div>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Ingresa tu API Key para habilitar los botones "Probar":</p>
+                            <div class="flex gap-2">
+                                <input type="password" id="api-key-input" placeholder="Tu API Key" style="background: rgba(0,0,0,0.2); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 16px; color: white; flex: 1; font-family: 'JetBrains Mono'; font-size: 0.9rem;">
+                                <button id="save-key-btn" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem;">Guardar Key</button>
+                            </div>
+                        </div>
+
+                        <div class="config-card" style="background: rgba(168, 85, 247, 0.03); border-color: rgba(168, 85, 247, 0.1); margin-bottom: 0;">
+                            <div class="config-header" style="color: #a855f7;">Generar API Key</div>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">¿No tienes una? Genera una clave con <b>1 mes</b> de duración:</p>
+                            <div id="gen-key-container">
+                                <button id="generate-key-btn" class="btn btn-primary" style="background: #a855f7; border-color: #a855f7; padding: 10px 20px; font-size: 0.85rem; width: 100%;">
+                                    <span class="material-symbols-outlined" style="font-size: 18px;">bolt</span>
+                                    Generar Key (1 Mes)
+                                </button>
+                            </div>
+                            <div id="generated-key-result" style="display: none; margin-top: 12px; animation: fadeIn 0.3s ease;">
+                                <div class="flex gap-2 items-center" style="background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; border: 1px dashed rgba(168, 85, 247, 0.3);">
+                                    <code id="new-api-key" style="color: #a855f7; font-family: 'JetBrains Mono'; font-size: 0.85rem; flex: 1; overflow: hidden; text-overflow: ellipsis;"></code>
+                                    <button id="copy-new-key-btn" class="material-symbols-outlined" style="background: none; border: none; color: #a855f7; cursor: pointer; font-size: 18px;">content_copy</button>
+                                </div>
+                                <p style="font-size: 0.7rem; color: #f87171; margin-top: 8px;">⚠️ Copia esta clave ahora, no volverá a aparecer.</p>
+                            </div>
                         </div>
                     </div>
 
@@ -389,6 +409,6 @@ data = response.<span style="color: #60a5fa;">json</span>()
         </aside>
     </div>
 
-    <script src="docs.js"></script>
+    <script type="module" src="docs.js"></script>
 </body>
 </html>
