@@ -110,9 +110,8 @@ ul {
 .flex-column { flex-direction: column; }
 .items-center { align-items: center; }
 .justify-between { justify-content: space-between; }
-.gap-1 { gap: 8px; }
-.gap-2 { gap: 16px; }
 .gap-4 { gap: 32px; }
+.gap-8 { gap: 32px; }
 
 /* Components */
 
@@ -312,7 +311,7 @@ section {
 .grid { display: grid; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-hero { grid-template-columns: 1fr 40px 1.2fr; }
+.grid-hero { grid-template-columns: 2.2fr 100px 1fr; }
 
 .hero h1 {
     font-size: 4.5rem;
@@ -393,14 +392,13 @@ section {
 /* --- Features (Stitch Style) --- */
 .feature-card {
     background: #162226;
-    padding: 2.5rem;
+    padding: 3rem 2.5rem;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    /*aspect-ratio: 1 / 1; */
-    min-width: 100px;
+    min-height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
