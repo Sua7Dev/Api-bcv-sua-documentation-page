@@ -1,28 +1,40 @@
-import dotenv from 'dotenv';
-import { createClient } from '@libsql/client';
-
-// Cargar variables de entorno antes de continuar
-await dotenv.config();
-
 /**
  * Script de Documentación Sua-BCV
  * Maneja el testing de endpoints y la generación de API Keys.
  */
+
+// Utilidad para escapar HTML y evitar XSS al inyectar respuestas en el DOM
+const escapeHtml = (str) => {
+    if (typeof str !== 'string') str = String(str);
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+};
+
 const init = async () => {
     // Asegurar que window.process existe
     if (typeof window.process === 'undefined') window.process = { env: {} };
 
     const BASE_URL = 'https://api-bcv-sua.vercel.app';
     
-    // Intentar cargar configuración desde el backend si no estamos local con .env
+    // Cargar API key desde el servidor (donde está la variable de entorno VITE_API_KEY)
     try {
         const configRes = await fetch('/api/config');
         if (configRes.ok) {
             const config = await configRes.json();
-            window.process.env.VITE_API_KEY = config.VITE_API_KEY;
+            if (config.VITE_API_KEY) {
+                window.process.env.VITE_API_KEY = config.VITE_API_KEY;
+                console.info(`✅ API Key cargada desde /api/config (${config.VITE_API_KEY.length} caracteres).`);
+            } else {
+                console.warn('⚠️ /api/config respondió OK pero VITE_API_KEY está vacía. Verifica la variable de entorno en Vercel.');
+            }
+        } else {
+            console.warn(`⚠️ /api/config respondió con status ${configRes.status}. Sin API key del servidor.`);
         }
     } catch (e) {
-        console.warn('No se pudo cargar config desde /api/config, usando fallback local si existe.');
+        console.warn('⚠️ No se pudo contactar /api/config:', e.message);
     }
 
     // Obtener la API KEY
@@ -57,42 +69,49 @@ const init = async () => {
                     const apiKey = getEnvApiKey();
                     if (!apiKey) {
                         responseArea.innerHTML = `
-                            <div class="response-header"><div class="response-title">Error</div></div>
+                            <div class="response-header"><div class="response-title">Sin API Key</div></div>
                             <div class="response-body" style="color: #f59e0b;">
-                                <b>Error:</b> No tienes una Clave de API configurada.<br><br>
-                                1. Usa el botón <b>Generar Nueva API Key</b> arriba.<br>
-                                2. O asegúrate de que la variable <code>VITE_API_KEY</code> esté configurada en Vercel.
+                                <b>No se encontró una Clave de API.</b><br><br>
+                                Opciones:<br>
+                                1. Usa el botón <b>Generar Nueva API Key</b> arriba para obtener una clave temporal.<br>
+                                2. Verifica que la variable <code>VITE_API_KEY</code> esté configurada en los ajustes de tu proyecto en Vercel.<br><br>
+                                <small style="opacity:0.7;">El servidor respondió con una clave vacía desde <code>/api/config</code>.</small>
                             </div>`;
                         return;
                     }
                     headers['x-api-key'] = apiKey;
-                    console.warn(`🚀 Enviando petición a ${fullUrl} con x-api-key.`);
+                    console.info(`🚀 Enviando petición a ${fullUrl} con x-api-key (${apiKey.length} chars).`);
                 }
                 
                 const response = await fetch(fullUrl, { headers });
                 const endTime = performance.now();
                 const duration = (endTime - startTime).toFixed(2);
                 
-                let responseContent;
+                let responseData = null;
+                let responseContent = '';
                 const contentType = response.headers.get('content-type');
                 
                 if (contentType && contentType.includes('application/json')) {
-                    const data = await response.json();
-                    responseContent = JSON.stringify(data, null, 2);
+                    responseData = await response.json();
+                    responseContent = escapeHtml(JSON.stringify(responseData, null, 2));
                 } else {
-                    responseContent = await response.text();
+                    responseContent = escapeHtml(await response.text());
                 }
                 
                 if (!response.ok) {
+                    const statusColor = response.status === 401 ? '#fef2f2' : '#fef2f2';
+                    const statusLabel = response.status === 401
+                        ? `${response.status} Unauthorized — API Key inválida o no enviada`
+                        : `${response.status} ${response.statusText}`;
                     responseArea.innerHTML = `
                         <div class="response-header">
                             <div class="response-title">Error HTTP ${response.status}</div>
                             <div class="response-meta">
-                                <span class="status-badge" style="background: #fef2f2; color: #991b1b; border: 1px solid #fee2e2;">Error</span>
+                                <span class="status-badge" style="background: #fef2f2; color: #991b1b; border: 1px solid #fee2e2;">${statusLabel}</span>
                                 <span class="time-badge">${duration}ms</span>
                             </div>
                         </div>
-                        <div class="response-body" style="color: #f87171;">${responseContent || response.statusText}</div>
+                        <div class="response-body" style="color: #f87171;">${responseContent || escapeHtml(response.statusText)}</div>
                     `;
                     return;
                 }
@@ -111,12 +130,17 @@ const init = async () => {
                     <div class="response-body">${responseContent}</div>
                 `;
             } catch (error) {
+                const isNetworkError = error instanceof TypeError && error.message.includes('fetch');
+                const friendlyMsg = isNetworkError
+                    ? `No se pudo conectar a la API. Verifica tu conexión o que la URL <code>${escapeHtml(fullUrl)}</code> sea accesible.`
+                    : escapeHtml(error.message);
                 responseArea.innerHTML = `
                     <div class="response-header">
-                        <div class="response-title">Respuesta</div>
+                        <div class="response-title">Error de Red</div>
                     </div>
-                    <div class="response-body" style="color: #f87171;">Error: ${error.message}</div>
+                    <div class="response-body" style="color: #f87171;">${friendlyMsg}</div>
                 `;
+                console.error('❌ Error en la petición:', error);
             }
         });
     });
