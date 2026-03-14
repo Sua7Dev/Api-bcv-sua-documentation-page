@@ -36,10 +36,6 @@
             </div>
             
             <div class="flex items-center gap-4">
-                <div class="search-bar" style="position: relative;">
-                    <span class="material-symbols-outlined" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--text-muted);">search</span>
-                    <input type="text" placeholder="Buscar en la documentación..." style="background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 16px 10px 40px; color: white; width: 300px; font-size: 0.9rem;">
-                </div>
                 <a href="index.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">
                     <span class="material-symbols-outlined" style="font-size: 18px;">home</span>
                     Volver al Inicio
@@ -85,10 +81,18 @@
                 </div>
 
                 <div class="nav-group">
-                    <h5>SDK & Ejemplos</h5>
+                    <h5>Lenguajes & SDK</h5>
                     <a href="#javascript" class="nav-link">
                         <span class="material-symbols-outlined">javascript</span>
                         JavaScript (Bun)
+                    </a>
+                    <a href="#dart" class="nav-link">
+                        <span class="material-symbols-outlined">flutter</span>
+                        Dart (Flutter)
+                    </a>
+                    <a href="#python" class="nav-link">
+                        <span class="material-symbols-outlined">terminal</span>
+                        Python (Requests)
                     </a>
                 </div>
 
@@ -138,7 +142,16 @@
                     </h2>
                     <p style="margin-bottom: 24px;">Para acceder a la API, debes incluir tu clave de API en el encabezado <code style="color: var(--primary); font-family: 'JetBrains Mono';">x-api-key</code> de cada solicitud.</p>
                     
-                    <div class="alert alert-warning">
+                    <div class="config-card" style="background: rgba(0, 208, 255, 0.03); border-color: rgba(0, 208, 255, 0.1);">
+                        <div class="config-header" style="color: var(--primary);">Prueba la API (Local)</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Ingresa tu API Key para habilitar los botones "Probar":</p>
+                        <div class="flex gap-2">
+                            <input type="password" id="api-key-input" placeholder="Tu API Key" style="background: rgba(0,0,0,0.2); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 16px; color: white; flex: 1; font-family: 'JetBrains Mono'; font-size: 0.9rem;">
+                            <button id="save-key-btn" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem;">Guardar Key</button>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning" style="margin-top: 24px;">
                         <span class="material-symbols-outlined">warning</span>
                         <div class="alert-content">
                             <h6>Atención</h6>
@@ -154,67 +167,82 @@
                     
                     <div class="endpoints-list">
                         <div class="endpoint-item">
-                            <span class="method">GET</span>
-                            <span class="path">/ping</span>
-                            <div class="endpoint-info">
-                                <p>Health check del servicio</p>
-                                <button class="btn-try" data-path="/ping">
-                                    <span class="material-symbols-outlined">play_arrow</span>
-                                    Probar
-                                </button>
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">https://api-bcv-sua.vercel.app</span>
+                                    <span class="path">/ping</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p>Health check. Devuelve <code>{"status":"ok"}</code> si activo.</p>
+                                </div>
+                                <button class="btn-try" data-path="/ping">Probar</button>
                             </div>
+                            <div class="response-area"></div>
                         </div>
                     </div>
                 </section>
 
                 <!-- Venezuela Realtime -->
                 <section id="venezuela-realtime" style="margin-bottom: 80px;">
-                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Venezuela — Cotizaciones en tiempo real</h2>
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Venezuela — Cotizaciones</h2>
                     
                     <div class="endpoints-list">
                         <div class="endpoint-item">
-                            <span class="method">GET</span>
-                            <span class="path">/v1/usd</span>
-                            <div class="endpoint-info">
-                                <p>Dólar (BCV + Paralelo)</p>
-                                <button class="btn-try" data-path="/v1/usd">
-                                    <span class="material-symbols-outlined">play_arrow</span>
-                                    Probar
-                                </button>
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
+                                    <span class="path">/usd</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p>Cotización del Dólar (BCV Oficial + Paralelo/Yadio)</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/usd">Probar</button>
                             </div>
+                            <div class="response-area"></div>
                         </div>
                         <div class="endpoint-item">
-                            <span class="method">GET</span>
-                            <span class="path">/v1/eur</span>
-                            <div class="endpoint-info">
-                                <p>Euro (BCV + Paralelo)</p>
-                                <button class="btn-try" data-path="/v1/eur">
-                                    <span class="material-symbols-outlined">play_arrow</span>
-                                    Probar
-                                </button>
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
+                                    <span class="path">/eur</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p>Cotización del Euro (BCV Oficial + Paralelo)</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/eur">Probar</button>
                             </div>
+                            <div class="response-area"></div>
                         </div>
                         <div class="endpoint-item">
-                            <span class="method">GET</span>
-                            <span class="path">/v1/cotizaciones</span>
-                            <div class="endpoint-info">
-                                <p>Todas las cotizaciones</p>
-                                <button class="btn-try" data-path="/v1/cotizaciones">
-                                    <span class="material-symbols-outlined">play_arrow</span>
-                                    Probar
-                                </button>
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
+                                    <span class="path">/cotizaciones</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p>Todas las cotizaciones disponibles en un solo objeto</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/cotizaciones">Probar</button>
                             </div>
+                            <div class="response-area"></div>
                         </div>
                         <div class="endpoint-item">
-                            <span class="method">GET</span>
-                            <span class="path">/v1/estado</span>
-                            <div class="endpoint-info">
-                                <p>Estado y última actualización</p>
-                                <button class="btn-try" data-path="/v1/estado">
-                                    <span class="material-symbols-outlined">play_arrow</span>
-                                    Probar
-                                </button>
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
+                                    <span class="path">/estado</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p>Estado del servicio y última actualización</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/estado">Probar</button>
                             </div>
+                            <div class="response-area"></div>
                         </div>
                     </div>
                 </section>
@@ -225,38 +253,43 @@
                     
                     <div class="endpoints-list">
                         <div class="endpoint-item">
-                            <span class="method">GET</span>
-                            <span class="path">/v1/historicos/dolares</span>
-                            <div class="endpoint-info">
-                                <p>Histórico completo Dólar</p>
-                                <button class="btn-try" data-path="/v1/historicos/dolares">
-                                    <span class="material-symbols-outlined">play_arrow</span>
-                                    Probar
-                                </button>
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
+                                    <span class="path">/historicos/dolares</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p>Histórico completo de cotizaciones del Dólar</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/historicos/dolares">Probar</button>
                             </div>
+                            <div class="response-area"></div>
                         </div>
                         <div class="endpoint-item">
-                            <span class="method">GET</span>
-                            <span class="path">/v1/historicos/euros</span>
-                            <div class="endpoint-info">
-                                <p>Histórico completo Euro</p>
-                                <button class="btn-try" data-path="/v1/historicos/euros">
-                                    <span class="material-symbols-outlined">play_arrow</span>
-                                    Probar
-                                </button>
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
+                                    <span class="path">/historicos/euros</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p>Histórico completo de cotizaciones del Euro</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/historicos/euros">Probar</button>
                             </div>
+                            <div class="response-area"></div>
                         </div>
                     </div>
                 </section>
 
-                <!-- SDK Examples -->
+                <!-- JavaScript Example -->
                 <section id="javascript" style="margin-bottom: 80px;">
-                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Ejemplos de Consumo</h2>
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">JavaScript (Bun)</h2>
+                    <p style="margin-bottom: 24px;">Ejemplo de cómo consumir la API y procesar los datos en una aplicación moderna.</p>
                     <div class="snippet-window">
                         <div class="snippet-tabs">
-                            <div class="tab-btn active" data-lang="js">JavaScript (Bun)</div>
-                            <div class="tab-btn" data-lang="dart">Dart (Flutter)</div>
-                            <div class="tab-btn" data-lang="python">Python</div>
+                            <div class="tab-btn active">fetch.js</div>
                             <div style="margin-left: auto; display: flex; align-items: center; padding-right: 20px;">
                                 <button class="copy-code-btn" style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; align-items: center; gap: 4px; cursor: pointer;">
                                     <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
@@ -264,16 +297,77 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="snippet-content" id="code-display">
-<pre style="color: #94a3b8;"><span style="color: #c084fc;">const</span> response = <span style="color: #c084fc;">await</span> <span style="color: #60a5fa;">fetch</span>(<span style="color: #4ade80;">'https://api-bcv-sua.vercel.app/v1/usd'</span>, {
-  <span style="color: #fb923c;">headers</span>: {
-    <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">'TU_API_KEY'</span>,
-    <span style="color: #4ade80;">'Accept'</span>: <span style="color: #4ade80;">'application/json'</span>
-  }
+                        <div class="snippet-content">
+<pre style="color: #94a3b8;"><span style="color: #64748b;">// 1. Obtener datos de la API</span>
+<span style="color: #c084fc;">const</span> response = <span style="color: #c084fc;">await</span> <span style="color: #60a5fa;">fetch</span>(<span style="color: #4ade80;">'https://api-bcv-sua.vercel.app/v1/usd'</span>, {
+  <span style="color: #fb923c;">headers</span>: { <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">'TU_API_KEY'</span> }
 });
 
 <span style="color: #c084fc;">const</span> data = <span style="color: #c084fc;">await</span> response.<span style="color: #60a5fa;">json</span>();
-<span style="color: #60a5fa;">console</span>.<span style="color: #60a5fa;">log</span>(data);</pre>
+
+<span style="color: #64748b;">// 2. Procesar y usar los datos (Ejemplo: Buscar cotización oficial)</span>
+<span style="color: #c084fc;">const</span> oficial = data.<span style="color: #60a5fa;">find</span>(rate => rate.fuente === <span style="color: #4ade80;">'oficial'</span>);
+<span style="color: #60a5fa;">console</span>.<span style="color: #60a5fa;">log</span>(<span style="color: #4ade80;">`Tasa BCV: BS. $ {oficial.valor}`</span>);</pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dart Example -->
+                <section id="dart" style="margin-bottom: 80px;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Dart (Flutter)</h2>
+                    <div class="snippet-window">
+                        <div class="snippet-tabs">
+                            <div class="tab-btn active">main.dart</div>
+                            <div style="margin-left: auto; display: flex; align-items: center; padding-right: 20px;">
+                                <button class="copy-code-btn" style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="snippet-content">
+<pre style="color: #94a3b8;"><span style="color: #c084fc;">import</span> <span style="color: #4ade80;">'package:http/http.dart'</span> <span style="color: #c084fc;">as</span> http;
+<span style="color: #c084fc;">import</span> <span style="color: #4ade80;">'dart:convert'</span>;
+
+Future&lt;<span style="color: #c084fc;">void</span>&gt; <span style="color: #60a5fa;">getRates</span>() <span style="color: #c084fc;">async</span> {
+  <span style="color: #c084fc;">final</span> res = <span style="color: #c084fc;">await</span> http.<span style="color: #60a5fa;">get</span>(
+    Uri.<span style="color: #60a5fa;">parse</span>(<span style="color: #4ade80;">'https://api-bcv-sua.vercel.app/v1/usd'</span>),
+    headers: { <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">'TU_API_KEY'</span> }
+  );
+
+  <span style="color: #c084fc;">if</span> (res.statusCode == <span style="color: #fb923c;">200</span>) {
+    <span style="color: #c084fc;">final</span> List data = <span style="color: #60a5fa;">jsonDecode</span>(res.body);
+    <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">'Tasa oficial: $ {data[0]["valor"]}'</span>);
+  }
+}</pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Python Example -->
+                <section id="python" style="margin-bottom: 80px;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Python</h2>
+                    <div class="snippet-window">
+                        <div class="snippet-tabs">
+                            <div class="tab-btn active">api.py</div>
+                            <div style="margin-left: auto; display: flex; align-items: center; padding-right: 20px;">
+                                <button class="copy-code-btn" style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="snippet-content">
+<pre style="color: #94a3b8;"><span style="color: #c084fc;">import</span> requests
+
+url = <span style="color: #4ade80;">"https://api-bcv-sua.vercel.app/v1/usd"</span>
+headers = { <span style="color: #4ade80;">"x-api-key"</span>: <span style="color: #4ade80;">"TU_API_KEY"</span> }
+
+response = requests.<span style="color: #60a5fa;">get</span>(url, headers=headers)
+data = response.<span style="color: #60a5fa;">json</span>()
+
+<span style="color: #c084fc;">for</span> rate <span style="color: #c084fc;">in</span> data:
+    <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">f"{rate['nombre']}: {rate['valor']}"</span>)</pre>
                         </div>
                     </div>
                 </section>
@@ -291,7 +385,7 @@
                                 </div>
                                 <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
                                     <li>Lanzamiento inicial de la API.</li>
-                                    <li>Migración completa al runtime de Bun para un aumento de rendimiento de 3x.</li>
+                                    <li>Lógica de Fin de Semana: Estabilidad garantizada durante el cierre bancario.</li>
                                     <li>Optimización de caché con Upstash Redis.</li>
                                 </ul>
                             </div>
@@ -310,7 +404,9 @@
                 <a href="#diagnostico" class="toc-link">Diagnóstico</a>
                 <a href="#venezuela-realtime" class="toc-link">Cotizaciones</a>
                 <a href="#venezuela-historicos" class="toc-link">Históricos</a>
-                <a href="#javascript" class="toc-link">Ejemplos</a>
+                <a href="#javascript" class="toc-link">JS Example</a>
+                <a href="#dart" class="toc-link">Dart Example</a>
+                <a href="#python" class="toc-link">Python Example</a>
                 <a href="#changelog" class="toc-link">Changelog</a>
             </nav>
         </aside>

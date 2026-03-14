@@ -683,9 +683,147 @@ footer {
     margin-right: var(--toc-width);
 }
 
-.docs-container {
-    max-width: 800px;
-    margin: 0 auto;
+/* Endpoints List */
+.endpoints-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.endpoint-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.endpoint-main {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.endpoint-route {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #0a0a0a;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.endpoint-route .method {
+    color: #10b981;
+    font-weight: 800;
+    font-size: 0.75rem;
+}
+
+.endpoint-route .base {
+    color: var(--text-muted);
+}
+
+.endpoint-route .path {
+    color: var(--white);
+    font-weight: 600;
+}
+
+.endpoint-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.endpoint-info p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Response Area */
+.response-area {
+    background: #0a0a0a;
+    border-top: 1px solid var(--card-border);
+    padding: 20px;
+    display: none; /* Shown via JS */
+}
+
+.response-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.response-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.response-meta {
+    display: flex;
+    gap: 12px;
+}
+
+.status-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.time-badge {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.response-body {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 16px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+/* Button Test (Probar) - Refined */
+.btn-try {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0b1215;
+    background: var(--white);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.btn-try:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.btn-try:active {
+    transform: scale(0.98);
 }
 
 .docs-breadcrumb {
@@ -908,14 +1046,177 @@ footer {
     opacity: 0;
 }
 
-/* Mobile Docs */
-@media (max-width: 1200px) {
-    .toc { display: none; }
-    .docs-main { margin-right: 0; }
+/* --- Hero Revisions --- */
+.dot-pulse {
+    position: relative;
+    display: inline-flex;
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    margin-right: 8px;
 }
 
-@media (max-width: 768px) {
-    .sidebar { display: none; }
-    .docs-main { margin-left: 0; padding: 40px 20px; }
-    .docs-header h1 { font-size: 2.5rem; }
+.dot-pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+/* Feature Cards Refined */
+.features .grid-3 {
+    margin-top: 64px;
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    border: 1px solid transparent;
+}
+
+/* Endpoints UI */
+.endpoints-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.endpoint-row {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 24px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: var(--transition);
+}
+
+.endpoint-row:hover {
+    transform: translateX(8px);
+    border-color: rgba(0, 208, 255, 0.3);
+}
+
+.endpoint-row.upcoming {
+    opacity: 0.5;
+}
+
+.method-tag {
+    background: rgba(0, 208, 255, 0.15);
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+.method-tag.disabled {
+    background: #262626;
+    color: #525252;
+}
+
+.endpoint-path {
+    flex: 1;
+    font-size: 1.1rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--white);
+}
+
+.endpoint-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-dot.online {
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+}
+
+/* CTA Banner Modern */
+.cta-banner {
+    background: linear-gradient(135deg, rgba(0, 208, 255, 0.15), rgba(0, 208, 255, 0.05));
+    border: 1px solid rgba(0, 208, 255, 0.2);
+    padding: 80px 40px;
+    border-radius: 32px;
+    text-align: center;
+}
+
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+}
+
+/* Footer Grid */
+.footer-grid {
+    display: grid;
+    grid-template-cols: 2fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.footer-brand p {
+    margin-top: 16px;
+    color: var(--text-muted);
+    max-width: 320px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links h4 {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-indicator .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-indicator .dot.online {
+    background: #10b981;
 }

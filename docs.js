@@ -1,87 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
     const BASE_URL = 'https://api-bcv-sua.vercel.app';
-    const TEST_API_KEY = 'TU_CLAVE'; // This will be handled by .env/logic later
+    
+    // NOTA DE SEGURIDAD: La API KEY no debe estar en el código frontend.
+    // Para probar localmente, puedes usar window.API_KEY en la consola o un campo de entrada.
+    // En producción, lo ideal es un proxy serverless para no exponer el secreto.
+    let TEST_API_KEY = window.API_KEY || ''; 
 
-    // --- Tab Switching ---
-    const tabs = document.querySelectorAll('.tab-btn');
-    const codeDisplay = document.querySelector('#code-display pre');
-
-    const snippets = {
-        js: `<span style="color: #c084fc;">const</span> response = <span style="color: #c084fc;">await</span> <span style="color: #60a5fa;">fetch</span>(<span style="color: #4ade80;">'${BASE_URL}/v1/usd'</span>, {
-  <span style="color: #fb923c;">headers</span>: {
-    <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">'TU_API_KEY'</span>,
-    <span style="color: #4ade80;">'Accept'</span>: <span style="color: #4ade80;">'application/json'</span>
-  }
-});
-
-<span style="color: #c084fc;">const</span> data = <span style="color: #c084fc;">await</span> response.<span style="color: #60a5fa;">json</span>();
-<span style="color: #60a5fa;">console</span>.<span style="color: #60a5fa;">log</span>(data);`,
-        
-        dart: `<span style="color: #c084fc;">import</span> <span style="color: #4ade80;">'package:http/http.dart'</span> <span style="color: #c084fc;">as</span> http;
-
-<span style="color: #c084fc;">void</span> <span style="color: #60a5fa;">fetchRates</span>() <span style="color: #c084fc;">async</span> {
-  <span style="color: #c084fc;">final</span> url = Uri.<span style="color: #60a5fa;">parse</span>(<span style="color: #4ade80;">'${BASE_URL}/v1/usd'</span>);
-  <span style="color: #c084fc;">final</span> response = <span style="color: #c084fc;">await</span> http.<span style="color: #60a5fa;">get</span>(url, headers: {
-    <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">'TU_API_KEY'</span>,
-  });
-
-  <span style="color: #c084fc;">if</span> (response.statusCode == <span style="color: #fb923c;">200</span>) {
-    <span style="color: #60a5fa;">print</span>(response.body);
-  }
-}`,
-        
-        python: `<span style="color: #c084fc;">import</span> requests
-
-url = <span style="color: #4ade80;">"${BASE_URL}/v1/usd"</span>
-headers = {
-    <span style="color: #4ade80;">"x-api-key"</span>: <span style="color: #4ade80;">"TU_API_KEY"</span>
-}
-
-response = requests.<span style="color: #60a5fa;">get</span>(url, headers=headers)
-<span style="color: #60a5fa;">print</span>(response.<span style="color: #60a5fa;">json</span>())`
-    };
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            const lang = tab.getAttribute('data-lang');
-            codeDisplay.innerHTML = snippets[lang];
-        });
-    });
-
-    // --- Endpoint Testing Logic ---
+    // --- Endpoint Testing Logic (Screenshot Style) ---
     const tryButtons = document.querySelectorAll('.btn-try');
     
     tryButtons.forEach(btn => {
         btn.addEventListener('click', async () => {
             const path = btn.getAttribute('data-path');
             const fullUrl = `${BASE_URL}${path}`;
+            const item = btn.closest('.endpoint-item');
+            const responseArea = item.querySelector('.response-area');
             
-            // Scroll to code display to show result
-            document.querySelector('#javascript').scrollIntoView({ behavior: 'smooth' });
+            // Show area and set loading state
+            responseArea.style.display = 'block';
+            responseArea.innerHTML = `
+                <div class="response-header">
+                    <div class="response-title">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+                        Respuesta
+                    </div>
+                </div>
+                <div class="response-body">Cargando...</div>
+            `;
             
-            codeDisplay.innerHTML = `<span style="color: #c084fc;">// Cargando datos de ${path}...</span>`;
+            const startTime = performance.now();
             
             try {
                 const headers = { 'Accept': 'application/json' };
                 if (path.startsWith('/v1/')) {
-                    headers['x-api-key'] = TEST_API_KEY;
+                    const savedKey = sessionStorage.getItem('api_key') || TEST_API_KEY;
+                    if (!savedKey) {
+                        responseArea.innerHTML = `<div class="response-body" style="color: #f59e0b;">Error: Se requiere una API KEY. Ingrésala en la sección de Autenticación.</div>`;
+                        return;
+                    }
+                    headers['x-api-key'] = savedKey;
                 }
                 
                 const response = await fetch(fullUrl, { headers });
-                const data = await response.json();
+                const endTime = performance.now();
+                const duration = (endTime - startTime).toFixed(2);
                 
-                // Format JSON for display
+                const data = await response.json();
                 const formattedJson = JSON.stringify(data, null, 2);
-                codeDisplay.innerHTML = `<span style="color: #64748b;">// Respuesta de ${fullUrl}</span>\n<span style="color: #4ade80;">${formattedJson}</span>`;
+                
+                responseArea.innerHTML = `
+                    <div class="response-header">
+                        <div class="response-title">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+                            Respuesta
+                        </div>
+                        <div class="response-meta">
+                            <span class="status-badge">${response.status}</span>
+                            <span class="time-badge">Tiempo de respuesta: ${duration}ms</span>
+                        </div>
+                    </div>
+                    <div class="response-body">${formattedJson}</div>
+                `;
             } catch (error) {
-                codeDisplay.innerHTML = `<span style="color: #f87171;">// Error al conectar con la API: ${error.message}</span>`;
+                responseArea.innerHTML = `
+                    <div class="response-header">
+                        <div class="response-title">Respuesta</div>
+                    </div>
+                    <div class="response-body" style="color: #f87171;">Error: ${error.message}</div>
+                `;
             }
         });
     });
 
-    // --- Copy to Clipboard ---
+    // --- Copy Logic ---
     const copyBtns = document.querySelectorAll('.copy-btn, .copy-code-btn');
     copyBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -89,44 +80,32 @@ response = requests.<span style="color: #60a5fa;">get</span>(url, headers=header
             if (btn.classList.contains('copy-btn')) {
                 text = btn.getAttribute('data-copy');
             } else {
-                text = codeDisplay.innerText;
+                const pre = btn.closest('.snippet-window').querySelector('pre');
+                text = pre.innerText;
             }
             
             navigator.clipboard.writeText(text).then(() => {
-                const originalContent = btn.innerHTML;
+                const originalHtml = btn.innerHTML;
                 btn.innerHTML = btn.classList.contains('copy-btn') 
                     ? 'done' 
                     : '<span class="material-symbols-outlined" style="font-size: 16px;">done</span> Copiado';
                 
                 setTimeout(() => {
-                    btn.innerHTML = originalContent;
+                    btn.innerHTML = originalHtml;
                 }, 2000);
             });
         });
     });
 
-    // --- Intersection Observer for Active TOC ---
+    // --- Active State Observers ---
     const sections = document.querySelectorAll('section');
-    const tocLinks = document.querySelectorAll('.toc-link');
+    const navLinks = document.querySelectorAll('.nav-link, .toc-link');
     
-    const observerOptions = {
-        rootMargin: '-10% 0px -80% 0px',
-        threshold: 0
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.getAttribute('id');
-                tocLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active');
-                    }
-                });
-
-                // Also update sidebar active state
-                document.querySelectorAll('.nav-link').forEach(link => {
+                navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${id}`) {
                         link.classList.add('active');
@@ -134,7 +113,22 @@ response = requests.<span style="color: #60a5fa;">get</span>(url, headers=header
                 });
             }
         });
-    }, observerOptions);
+    }, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
 
-    sections.forEach(section => observer.observe(section));
+    sections.forEach(s => observer.observe(s));
+
+    // --- API Key Management ---
+    const keyInput = document.getElementById('api-key-input');
+    const saveKeyBtn = document.getElementById('save-key-btn');
+
+    if (saveKeyBtn) {
+        saveKeyBtn.addEventListener('click', () => {
+            const key = keyInput.value.trim();
+            if (key) {
+                sessionStorage.setItem('api_key', key);
+                alert('API Key guardada localmente para esta sesión.');
+                keyInput.value = '';
+            }
+        });
+    }
 });

@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API SUA-BCV | Datos Cambiarios en Tiempo Real</title>
-    <meta name="description" content="Obtén las tasas oficiales del BCV con latencia mínima y máxima confiabilidad. Optimizado para Bun y desplegado en el Edge.">
+    <title>Sua-BCV | API de Tasa Cambiaria Venezuela</title>
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="La API definitiva para obtener tasas de cambio del BCV y Paralelo en Venezuela bajo Edge Runtime.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,13 +19,13 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-background text-main">
 
     <header class="glass">
         <div class="container flex items-center justify-between">
             <a href="#" class="logo">
                 <div class="logo-icon">
-                    <span class="material-symbols-outlined">currency_exchange</span>
+                    <span class="material-symbols-outlined">api</span>
                 </div>
                 API SUA-BCV
             </a>
@@ -34,7 +36,7 @@
                     <li><a href="https://github.com/Sua7Dev/api-bcv-sua" target="_blank">GitHub</a></li>
                 </ul>
             </nav>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-4">
                 <button class="btn btn-ghost">Login</button>
                 <a href="docs.html" class="btn btn-primary">Empezar ahora</a>
             </div>
@@ -43,11 +45,11 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="container hero-grid">
+        <section class="hero glass-gradient">
+            <div class="container grid grid-2 items-center gap-10">
                 <div class="hero-content">
                     <div class="badge">
-                        <div class="pulse"></div>
+                        <span class="dot-pulse"></span>
                         v1.2.0 Ya disponible
                     </div>
                     <h1>API <span>SUA-BCV</span>: Datos cambiarios en tiempo real</h1>
@@ -57,162 +59,137 @@
                             Empezar ahora
                             <span class="material-symbols-outlined">arrow_forward</span>
                         </a>
-                        <button class="btn btn-secondary">
+                        <a href="https://github.com/Sua7Dev/api-bcv-sua" target="_blank" class="btn btn-secondary">
                             <span class="material-symbols-outlined">code</span>
                             Ver en GitHub
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <div class="code-window">
+                    <div class="code-card">
                         <div class="code-header">
-                            <div class="dot red"></div>
-                            <div class="dot yellow"></div>
-                            <div class="dot green"></div>
-                            <div class="code-filename">example.js</div>
+                            <div class="dots"><span></span><span></span><span></span></div>
+                            <div class="tab">example.js</div>
                         </div>
-                        <div class="code-content">
-                            <div><span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'https://api-sua-bcv.io/v1/usd'</span>, {</div>
-                            <div class="indent">headers: { <span class="string">'Authorization'</span>: <span class="string">'Bearer YOUR_API_KEY'</span> }</div>
-                            <div>});</div>
-                            <div style="margin-top: 10px;"><span class="keyword">const</span> data = <span class="keyword">await</span> response.json();</div>
-                            <div>console.log(data);</div>
-                            
-                            <div class="code-output">
-                                <span class="comment">// Output:</span><br>
-                                {<br>
-                                &nbsp;&nbsp;"rate": 36.42,<br>
-                                &nbsp;&nbsp;"currency": "USD",<br>
-                                &nbsp;&nbsp;"updated_at": "2024-05-20T14:00:00Z"<br>
-                                }
-                            </div>
+                        <div class="code-body">
+                            <pre><code><span class="keyword">const</span> response = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'https://api-bcv-sua.../v1/usd'</span>, {
+  <span class="keyword">headers</span>: { <span class="string">'x-api-key'</span>: <span class="string">'YOUR_API_KEY'</span> }
+});
+
+<span class="keyword">const</span> data = <span class="keyword">await</span> response.<span style="color: var(--primary);">json</span>();
+
+<span class="comment">// Output:</span>
+{
+  <span class="key">"fuente"</span>: <span class="string text-emerald-400">"oficial"</span>,
+  <span class="key">"valor"</span>: <span class="number">446.80</span>,
+  <span class="key">"moneda"</span>: <span class="string">"USD"</span>
+}</code></pre>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section id="features" class="features">
+        <!-- Features -->
+        <section id="features" class="features section">
             <div class="container">
-                <div class="section-header">
-                    <h2>Diseñado para el Rendimiento</h2>
+                <div class="section-title text-center">
+                    <h2>Diseñada para el Rendimiento</h2>
                     <p>Infraestructura moderna para aplicaciones de alto tráfico.</p>
                 </div>
-                <div class="grid-3">
-                    <div class="card">
-                        <div class="feature-icon">
+                <div class="grid grid-3 gap-8">
+                    <div class="feature-card group">
+                        <div class="feature-icon border-primary/20 bg-primary/10 text-primary">
                             <span class="material-symbols-outlined">bolt</span>
                         </div>
                         <h3>Ultra Rápida</h3>
-                        <p>Bun runtime & Vercel Edge para una latencia global mínima. Respuestas en milisegundos desde cualquier lugar.</p>
+                        <p>Bun runtime & Vercel Edge para una latencia global mínima. Respuestas en milisegundos.</p>
                     </div>
-                    <div class="card">
-                        <div class="feature-icon">
+                    <div class="feature-card group">
+                        <div class="feature-icon border-primary/20 bg-primary/10 text-primary">
                             <span class="material-symbols-outlined">security</span>
                         </div>
                         <h3>Segura</h3>
-                        <p>Gestión avanzada de API Keys con rotación automática, gestión de vencimiento y rate limiting por aplicación.</p>
+                        <p>Gestión avanzada de API Keys y rate limiting optimizado para proteger tus endpoints.</p>
                     </div>
-                    <div class="card">
-                        <div class="feature-icon">
+                    <div class="feature-card group">
+                        <div class="feature-icon border-primary/20 bg-primary/10 text-primary">
                             <span class="material-symbols-outlined">cloud_sync</span>
                         </div>
                         <h3>Confiable</h3>
-                        <p>Sincronización automática vía Upstash Redis para alta disponibilidad y consistencia de datos oficial del BCV.</p>
+                        <p>Sincronización automática vía Upstash Redis para alta disponibilidad de los datos del BCV.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Endpoints Section -->
-        <section id="doc" class="endpoints">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Endpoints Disponibles</h2>
-                    <p>Estructura de rutas simple y predecible para una integración rápida.</p>
-                </div>
-                <div class="endpoints-list">
-                    <div class="endpoint-item">
-                        <span class="method">GET</span>
-                        <span class="path">/v1/usd</span>
-                        <div class="endpoint-info">
-                            <p>Tasa oficial Dólar BCV</p>
-                            <div class="status-dot"></div>
-                        </div>
+        <!-- Endpoints Table-like Section -->
+        <section class="section">
+            <div class="container" style="max-width: 900px;">
+                <h2 class="text-3xl font-bold text-white mb-2">Endpoints Disponibles</h2>
+                <p class="text-slate-400 mb-10">Estructura de rutas simple y predecible para una integración rápida.</p>
+                
+                <div class="endpoints-stack">
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/usd</code>
+                        <span class="endpoint-desc">Tasa oficial Dólar BCV</span>
+                        <div class="status-dot online"></div>
                     </div>
-                    <div class="endpoint-item">
-                        <span class="method">GET</span>
-                        <span class="path">/v1/eur</span>
-                        <div class="endpoint-info">
-                            <p>Tasa oficial Euro BCV</p>
-                            <div class="status-dot"></div>
-                        </div>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/eur</code>
+                        <span class="endpoint-desc">Tasa oficial Euro BCV</span>
+                        <div class="status-dot online"></div>
                     </div>
-                    <div class="endpoint-item disabled">
-                        <span class="method">GET</span>
-                        <span class="path">/v1/history</span>
-                        <div class="endpoint-info">
-                            <p style="font-style: italic;">Próximamente</p>
-                        </div>
+                    <div class="endpoint-row upcoming">
+                        <span class="method-tag disabled">GET</span>
+                        <code class="endpoint-path">/v1/historicos</code>
+                        <span class="endpoint-desc italic">Próximamente</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer CTA -->
-        <section class="cta">
+        <!-- Final CTA -->
+        <section class="section">
             <div class="container">
-                <div class="cta-box">
-                    <h2>¿Listo para construir el futuro?</h2>
-                    <p>Únete a cientos de desarrolladores que ya están integrando datos cambiarios confiables en sus plataformas.</p>
-                    <div class="cta-group">
-                        <a href="docs.html" class="btn btn-primary">Crear cuenta gratis</a>
-                        <a href="docs.html" class="btn btn-secondary">Leer documentación</a>
+                <div class="cta-banner">
+                    <h2 class="text-4xl font-black text-white">¿Listo para construir el futuro?</h2>
+                    <p>Únete a cientos de desarrolladores que ya están integrando datos cambiarios confiables.</p>
+                    <div class="cta-actions">
+                        <a href="docs.html" class="btn btn-primary px-10">Crear cuenta gratis</a>
+                        <a href="docs.html" class="btn btn-secondary px-10">Leer documentación</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-info">
-                    <a href="#" class="logo">
-                        <div class="logo-icon">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon bg-primary text-background-dark">
                             <span class="material-symbols-outlined">currency_exchange</span>
                         </div>
-                        API SUA-BCV
-                    </a>
-                    <p>La solución definitiva para obtener datos cambiarios oficiales de Venezuela con la infraestructura de mayor rendimiento disponible.</p>
+                        <span>API SUA-BCV</span>
+                    </div>
+                    <p>La solución definitiva para obtener datos cambiarios oficiales de Venezuela con alto rendimiento.</p>
                 </div>
-                <div class="footer-nav">
+                <div class="footer-links">
                     <h4>Producto</h4>
-                    <ul>
-                        <li><a href="#">Características</a></li>
-                        <li><a href="#">Documentación</a></li>
-                        <li><a href="#">SDKs</a></li>
-                        <li><a href="#">Precios</a></li>
-                    </ul>
-                </div>
-                <div class="footer-nav">
-                    <h4>Comunidad</h4>
-                    <ul>
-                        <li><a href="https://github.com/Sua7Dev" target="_blank">GitHub</a></li>
-                        <li><a href="#">Twitter (X)</a></li>
-                        <li><a href="#">Discord</a></li>
-                        <li><a href="#">Status</a></li>
-                    </ul>
+                    <a href="#">Características</a>
+                    <a href="docs.html">Documentación</a>
+                    <a href="#">GitHub</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 API SUA-BCV. No afiliado oficialmente con el BCV.</p>
-                <div class="flex items-center gap-4">
-                    <div class="status-check">
-                        <div class="status-dot"></div>
-                        Todos los sistemas operativos
-                    </div>
+                <p>© 2026 API SUA-BCV. No afiliado oficialmente con el BCV.</p>
+                <div class="status-indicator">
+                    <span class="dot online"></span>
+                    <span>Todos los sistemas operativos</span>
                 </div>
             </div>
         </div>
