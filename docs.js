@@ -73,8 +73,29 @@ const init = async () => {
                 const endTime = performance.now();
                 const duration = (endTime - startTime).toFixed(2);
                 
-                const data = await response.json();
-                const formattedJson = JSON.stringify(data, null, 2);
+                let responseContent;
+                const contentType = response.headers.get('content-type');
+                
+                if (contentType && contentType.includes('application/json')) {
+                    const data = await response.json();
+                    responseContent = JSON.stringify(data, null, 2);
+                } else {
+                    responseContent = await response.text();
+                }
+                
+                if (!response.ok) {
+                    responseArea.innerHTML = `
+                        <div class="response-header">
+                            <div class="response-title">Error HTTP ${response.status}</div>
+                            <div class="response-meta">
+                                <span class="status-badge" style="background: #f87171;">Error</span>
+                                <span class="time-badge">${duration}ms</span>
+                            </div>
+                        </div>
+                        <div class="response-body" style="color: #f87171;">${responseContent || response.statusText}</div>
+                    `;
+                    return;
+                }
                 
                 responseArea.innerHTML = `
                     <div class="response-header">
@@ -83,11 +104,11 @@ const init = async () => {
                             Respuesta
                         </div>
                         <div class="response-meta">
-                            <span class="status-badge">${response.status}</span>
-                            <span class="time-badge">Tiempo de respuesta: ${duration}ms</span>
+                            <span class="status-badge" style="background: #10b981;">${response.status} OK</span>
+                            <span class="time-badge">Tiempo: ${duration}ms</span>
                         </div>
                     </div>
-                    <div class="response-body">${formattedJson}</div>
+                    <div class="response-body">${responseContent}</div>
                 `;
             } catch (error) {
                 responseArea.innerHTML = `
