@@ -311,7 +311,13 @@ section {
 .grid { display: grid; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-hero { grid-template-columns: 2.2fr 100px 1fr; }
+.grid-hero { 
+    grid-template-columns: 1fr 80px 460px; /* El texto toma el resto, el código se queda en 460px */
+    width: 100%;
+}
+@media (max-width: 1024px) {
+    .grid-hero { grid-template-columns: 1fr; gap: 40px; }
+}
 
 .hero h1 {
     font-size: 4.5rem;
@@ -324,7 +330,7 @@ section {
 
 .hero p {
     font-size: 1.25rem;
-    max-width: 500px;
+    max-width: 100%; /* Permitir que ocupe todo el espacio de su columna */
 }
 
 /* --- Code Highlighting (Stitch Style) --- */
