@@ -646,15 +646,16 @@ footer {
 
 .docs-layout {
     display: flex;
-    min-height: calc(100vh - var(--header-height));
-    padding-top: var(--header-height);
+    min-height: 100vh;
 }
 
 /* Sidebar */
 .sidebar {
     width: var(--sidebar-width);
     position: fixed;
-    height: calc(100vh - var(--header-height));
+    top: 0;
+    left: 0;
+    height: 100vh;
     overflow-y: auto;
     border-right: 1px solid var(--card-border);
     padding: 40px 24px;
@@ -666,6 +667,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    height: 100%;
 }
 
 .nav-group h5 {
@@ -1034,8 +1036,9 @@ footer {
 .toc {
     width: var(--toc-width);
     position: fixed;
+    top: 0;
     right: 0;
-    height: calc(100vh - var(--header-height));
+    height: 100vh;
     padding: 40px 24px;
     border-left: 1px solid var(--card-border);
 }
