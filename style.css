@@ -11,7 +11,7 @@
     --white: #ffffff;
     
     /* Gradients */
-    --hero-gradient: radial-gradient(circle at top right, rgba(0, 208, 255, 0.08) 0%, rgba(168, 85, 247, 0.05) 30%, #06090c 70%);
+    --hero-gradient: radial-gradient(circle at top right, rgba(8, 22, 26, 1) 0%, #020304 100%);
     --code-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     
     /* Layout */
