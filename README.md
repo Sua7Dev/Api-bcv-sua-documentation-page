@@ -41,7 +41,13 @@ Para garantizar la estabilidad del servicio, la generación de API Keys requiere
 
 ## 📝 Changelog
 
-### v1.3.1 (Marzo 2026) - UI & Responsiveness Fix
+### v1.4.0 (2026-03-14): Pulido final de responsividad y diseño.
+- Implementación de tipografía fluida (`clamp`) para el hero section.
+- Corrección de desbordamiento horizontal en dispositivos móviles de 6.6".
+- Centrado y optimización de la documentación para monitores de 24" y resoluciones ultra-wide.
+- Reposicionamiento del menú móvil para evitar solapamientos.
+- Mejora de contraste en textos primarios y secundarios.
+### v1.3.1 (2026-03-14): Solución de problemas críticos de UI y responsividad.
 - **Floating Auth**: Rediseño del botón de login como un chip flotante en la esquina superior derecha.
 - **Responsividad Crítica**: Mejoras en media queries para PC, Laptop, Tablet y Móvil.
 - **UX en Documentación**: Añadida sección de "Endpoints" y mejoras de contraste en botones de GitHub.
