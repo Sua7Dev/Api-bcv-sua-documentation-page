@@ -1,0 +1,17 @@
+­ƒøá´©Å  Entorno de desarrollo: true
+11 |     process.env.DEV = process.env.DEV || "true";
+12 | }
+13 | 
+14 | console.log("­ƒøá´©Å  Entorno de desarrollo:", process.env.DEV);
+15 | 
+16 | const server = serve({
+                    ^
+error: Failed to start server. Is port 3000 in use?
+ syscall: "listen",
+   errno: 0,
+    code: "EADDRINUSE"
+
+      at D:\samue\Escritorio\trae pruebas\landing api\bun-server.js:16:16
+      at loadAndEvaluateModule (2:1)
+
+Bun v1.3.10 (Windows x64)

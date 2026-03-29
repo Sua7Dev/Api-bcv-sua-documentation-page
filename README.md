@@ -18,9 +18,30 @@ La solución definitiva para obtener tasas de cambio oficiales del Banco Central
 ## 🛠️ Stack Tecnológico
 
 - **Frontend**: HTML5, Vanilla JavaScript, Tailwind CSS.
-- **Backend (Serverless)**: Vercel Edge Functions (Edge Runtime).
-- **Runtime**: [Bun](https://bun.sh/).
-- **Base de Datos**: [Turso](https://turso.tech/) (SQLite distribuido).
+- **Backend (Serverless)**:## Ejecución Local con Bun
+
+Para ejecutar este proyecto localmente, asegúrate de tener instalado [Bun](https://bun.sh/).
+
+```bash
+# Instalar dependencias
+bun install
+
+# Iniciar el servidor (ahora con soporte para API Endpoints y Entorno de Desarrollo)
+bun run bun-server.js
+```
+
+El servidor estará disponible en `http://localhost:3000`.
+
+### Endpoints Disponibles
+- `/api/config`: Entrega la API Key al frontend.
+- `/api/proxy`: Reenvía peticiones a la API real evitando CORS.
+- `/api/auth/github`: Inicia el flujo de autenticación Social Login.
+- `/api/auth/github/callback`: Maneja el retorno de GitHub y genera el token de sesión.
+- `/api/generate-key`: Genera una nueva API Key vinculada al usuario (requiere autenticación).
+
+---
+
+tech/) (SQLite distribuido).
 - **Autenticación**: GitHub OAuth 2.0 + JWT.
 
 ## 🔐 Autenticación y API Keys
