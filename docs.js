@@ -3,6 +3,7 @@
  * Maneja el testing de endpoints y la generación de API Keys.
  */
 
+let tasaActual = 0;
 // Utilidad para escapar HTML y evitar XSS al inyectar respuestas en el DOM
 const escapeHtml = (str) => {
     if (typeof str !== 'string') str = String(str);
@@ -40,6 +41,7 @@ const init = async () => {
 
     // Obtener la API KEY
     const getEnvApiKey = () => window.process?.env?.VITE_API_KEY || '';
+    
 
     // --- Authentication & Session Logic ---
     const checkAuth = () => {
@@ -79,7 +81,6 @@ const init = async () => {
         }
         return null;
     };
-
     const sessionToken = checkAuth();
 
     // Logout logic
@@ -228,6 +229,66 @@ const init = async () => {
         });
     };
 
+    const obtenerDolarTasaBCV = async () => {
+        try {
+            const controller = new AbortController();
+            const id = setTimeout(() => controller.abort(), 15000);
+
+            const API_KEY = getEnvApiKey();
+            const path = encodeURIComponent('/v1/cotizaciones');
+            const respuesta = await fetch(`${PROXY_BASE}?path=${path}`, {
+                headers: {
+                    Accept: 'application/json',
+                    'x-api-key': API_KEY
+                },
+                signal: controller.signal
+            });
+
+            clearTimeout(id);
+
+            if (!respuesta.ok) throw new Error(`Status: ${respuesta.status}`);
+
+            const datos = await respuesta.json();
+            const dolar = datos.find((c) => c.moneda === 'USD');
+
+            return dolar ? dolar.valor : null;
+        } catch (error) {
+            console.error('Error en convertidor:', error.message);
+            return null;
+        }
+    };
+    async function dolarConverter() {
+        const inputBs = document.getElementById('input-bs');
+        const inputUsd = document.getElementById('input-usd');
+        const labelTasa = document.getElementById('tasa-referencia');
+
+        try {
+            const valor = await obtenerDolarTasaBCV();
+            console.log(valor)
+
+            if (valor) {
+                tasaActual = parseFloat(valor);
+                labelTasa.textContent = tasaActual.toLocaleString('es-VE', {
+                    minimumFractionDigits: 2
+                });
+
+                inputBs.addEventListener('input', () => {
+                    const montoBs = parseFloat(inputBs.value);
+
+                    if (!isNaN(montoBs) && tasaActual > 0) {
+                        const resultado = montoBs / tasaActual;
+                        inputUsd.value = resultado.toFixed(2); 
+                    } else {
+                        inputUsd.value = '';
+                    }
+                });
+            }
+        } catch (error) {
+            labelTasa.textContent = 'Error al cargar';
+            labelTasa.style.color = '#ff6b6b';
+        }
+    }
+
     // Global copy buttons
     document.querySelectorAll('.copy-btn, .copy-code-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -314,7 +375,7 @@ const init = async () => {
             }
         });
     }
-
+    await dolarConverter();
     // --- Active State Observers ---
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link, .toc-link');

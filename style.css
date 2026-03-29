@@ -1060,6 +1060,19 @@ footer {
     overflow-x: auto;
 }
 
+/* BCV Converter */
+
+input#input-bs::-webkit-outer-spin-button,
+input#input-bs::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input#input-bs {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
 /* Timeline */
 .timeline {
     position: relative;
