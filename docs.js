@@ -282,6 +282,14 @@ const init = async () => {
                         inputUsd.value = '';
                     }
                 });
+                inputUsd.addEventListener('input', () => {
+                    const montoUsd = parseFloat(inputUsd.value);
+                    if (!isNaN(montoUsd) && tasaActual > 0) {
+                        inputBs.value = (montoUsd * tasaActual).toFixed(2);
+                    } else {
+                        inputBs.value = '';
+                    }
+                });
             }
         } catch (error) {
             labelTasa.textContent = 'Error al cargar';
