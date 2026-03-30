@@ -1530,6 +1530,7 @@ input#input-usd {
         width: 42px;
         height: 42px;
         border-radius: 10px;
+        border: none;
         align-items: center;
         justify-content: center;
         cursor: pointer;
@@ -1575,7 +1576,6 @@ input#input-usd {
     }
 
     .floating-auth #nav-menu {
-        padding: 6px 12px;
         background: rgba(11, 18, 21, 0.8);
     }
 
