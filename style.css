@@ -1388,7 +1388,6 @@ input#input-usd {
     background: rgba(11, 18, 21, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 100px;
-    padding: 8px 16px;
     display: flex;
     align-items: center;
     gap: 12px;
