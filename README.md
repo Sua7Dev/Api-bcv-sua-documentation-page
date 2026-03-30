@@ -14,6 +14,19 @@ La solución definitiva para obtener tasas de cambio oficiales del Banco Central
 - **Seguridad Avanzada**: Sistema de autenticación con GitHub y gestión de API Keys con vencimiento.
 - **Documentación Interactiva**: Prueba los endpoints directamente desde el navegador en múltiples lenguajes (JS, Dart, Python).
 - **Estética Premium**: Diseño moderno con modo oscuro, efectos de glassmorfismo y animaciones fluidas.
+- **Planes Flexibles**: Desde acceso gratuito hasta licencias permanentes con soporte prioritario.
+
+## 💳 Planes y Precios
+
+| Plan | Duración | Costo | Beneficios |
+| :--- | :--- | :--- | :--- |
+| **Mensual** | 1 Mes | Gratis | Acceso a los endpoints (Prueba) |
+| **Anual** | 1 Año | 6$ | Acceso a los endpoints + Soporte prioritario |
+| **Permanente** | Vitalicio | 20$ | **Acceso ilimitado** + Actualizaciones de por vida |
+
+> [!TIP]
+> Para adquirir cualquier plan o solicitar información personalizada, puedes contactarnos vía WhatsApp: [Click aquí](https://wa.link/byrrh3)
+
 
 ## 🛠️ Stack Tecnológico
 
@@ -62,7 +75,9 @@ Para garantizar la estabilidad del servicio, la generación de API Keys requiere
 
 ## Registro de Cambios (Timeline)
 
-- **v1.5 (Marzo 28-30, 2026)**: Nuevos endpoints (`/v1/...-par`, `/v1/...-all`), corrección de lógica de fin de semana, limpieza de endpoints deprecados y optimización móvil integral.
+- **v1.6 (Marzo 30, 2026)**: Implementación de sección de Precios y soporte vía WhatsApp, destacando el plan "Permanente" con acceso ilimitado.
+- **v1.5 (Marzo 28-29, 2026)**: Nuevos endpoints (`/v1/...-par`, `/v1/...-all`), corrección de lógica de fin de semana, limpieza de endpoints deprecados y optimización móvil integral.
+
 - **v1.4 (Marzo 26, 2026)**: Lógica de persistencia diaria hasta medianoche, arreglos en workflows de cron y funciones edge.
 - **v1.3 (Marzo 21, 2026)**: Migración de base de datos a Turso (LibSQL) y corrección de actualización de montos.
 - **v1.2 (Marzo 14, 2026)**: Agregado `valorAnterior` y `fechaAnterior`, normalización de nombres y validación de API-KEYS.

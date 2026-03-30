@@ -514,6 +514,122 @@ section {
     line-height: 1.6;
 }
 
+/* Pricing Section */
+.pricing-grid {
+    margin-top: 64px;
+}
+
+.pricing-card {
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+}
+
+.plan-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    background: rgba(0, 208, 255, 0.1);
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 1px solid rgba(0, 208, 255, 0.2);
+}
+
+.plan-price {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--white);
+    margin: 16px 0 4px;
+    line-height: 1;
+}
+
+.plan-price.highlight {
+    color: var(--primary);
+}
+
+.plan-duration {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.plan-features {
+    padding: 0;
+    margin: 0 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-grow: 1;
+}
+
+.plan-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.plan-features li .material-symbols-outlined {
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.pricing-footer {
+    margin-top: auto;
+}
+
+/* Featured Plan (Permanent) */
+.featured-plan {
+    border-color: rgba(0, 208, 255, 0.4);
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 208, 255, 0.1);
+}
+
+.featured-plan::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, var(--primary), transparent, var(--primary));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.featured-plan:hover {
+    box-shadow: 0 0 60px rgba(0, 208, 255, 0.25);
+    border-color: var(--primary);
+}
+
+.best-value {
+    position: absolute;
+    top: -60px;
+    right: -10px;
+    background: var(--primary);
+    color: var(--background);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    transform: rotate(5deg);
+    box-shadow: 0 4px 12px rgba(0, 208, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Endpoints Section */
 .endpoints-list {
     display: flex;
