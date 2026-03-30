@@ -570,47 +570,98 @@ data = response.<span style="color: #60a5fa;">json</span>()
                 <section id="changelog">
                     <h2 style="font-size: 1.75rem; margin-bottom: 40px;">Registro de Cambios</h2>
                     <div class="timeline">
+                        <!-- v1.5 -->
                         <div class="timeline-item">
                             <div class="timeline-dot" style="background: var(--primary); box-shadow: 0 0 15px var(--primary);"></div>
                             <div class="version-badge">
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                                    <span style="font-weight: 800; color: white;">v1.5.1</span>
-                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">2025-03-30</span>
+                                    <span style="font-weight: 800; color: white;">v1.5</span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">Marzo 28-30, 2026</span>
                                 </div>
                                 <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
-                                    <li>Limpieza de Endpoints: Se movieron `/v1/estado` y `/v1/historicos/*` a la sección de Deprecados.</li>
-                                    <li>Refactor de Arquitectura: Reemplazo de sección 'Históricos' por 'Deprecados' para mejor ciclo de vida de la API.</li>
+                                    <li>Nuevos endpoints <code>/usd-par</code> <code>/usd-all</code> <code>/eur-par</code> <code>/eur-all</code> <code>/cotizaciones-par</code> y <code>/cotizaciones-all</code> para separar la gestión de las tasas oficiales de las paralelas.</li>
+                                    <li>Lógica de fin de semana: Se mantiene la tasa del viernes hasta el lunes.</li>
+                                    <li>Limpieza de Endpoints: Se movieron <code>/v1/estado</code> y <code>/v1/historicos/*</code> a la sección de Deprecados.</li>
+                                    <li>Optimización Móvil: Mejora en la visualización de rutas y navegación (v1.5.1).</li>
                                 </ul>
                             </div>
                         </div>
 
+                        <!-- v1.4 -->
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
                             <div class="version-badge">
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                                    <span style="font-weight: 800; color: white;">v1.3.0</span>
-                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">2025-03-30</span>
+                                    <span style="font-weight: 800; color: white;">v1.4</span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">Marzo 26, 2026</span>
                                 </div>
                                 <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
-                                    <li>Nuevos Endpoints: Soporte para tasas paralelas (USD/EUR) y combinadas (-par, -all).</li>
-                                    <li>Estructura de Respuesta: Optimización de campos `valorAnterior` y fechas efectivas.</li>
-                                    <li>Seguridad: Mejora en la validación de API Keys contra Turso.</li>
-                                    <li>Filtro Inteligente: Lógica avanzada para fines de semana y cierre bancario.</li>
+                                    <li>Lógica de persistencia de tasa diaria hasta medianoche.</li>
+                                    <li>Ajustes en el workflow de cron con GitHub Actions.</li>
+                                    <li>Mejoras de compatibilidad con Vercel Edge Functions.</li>
                                 </ul>
                             </div>
                         </div>
 
+                        <!-- v1.3 -->
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
                             <div class="version-badge">
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                                    <span style="font-weight: 800; color: white;">v1.0.0</span>
-                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">2024-05-20</span>
+                                    <span style="font-weight: 800; color: white;">v1.3</span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">Marzo 21, 2026</span>
                                 </div>
                                 <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
-                                    <li>Lanzamiento inicial de la API.</li>
-                                    <li>Lógica de Fin de Semana: Estabilidad garantizada durante el cierre bancario.</li>
-                                    <li>Optimización de caché con Upstash Redis.</li>
+                                    <li>Migración de base de datos SQLite a Turso (LibSQL).</li>
+                                    <li>Corrección de fallos en la actualización de montos en tiempo real.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- v1.2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="version-badge">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                    <span style="font-weight: 800; color: white;">v1.2</span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">Marzo 14, 2026</span>
+                                </div>
+                                <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
+                                    <li>Agregado <code>valorAnterior</code> y <code>fechaAnterior</code> para comparativas.</li>
+                                    <li>Normalización de nombres: "Oficial" a "Dolar".</li>
+                                    <li>Sistema de mensajes de error detallados.</li>
+                                    <li>Validación y verificación robusta de API-KEYS.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- v1.1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="version-badge">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                    <span style="font-weight: 800; color: white;">v1.1</span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">Marzo 10, 2026</span>
+                                </div>
+                                <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
+                                    <li>Despliegue oficial en Vercel.</li>
+                                    <li>Implementación de API-KEYS sociales (GitHub Auth).</li>
+                                    <li>Rate limit (60 req/min) y sistema de cola (embudo) para peticiones.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- v1.0 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="version-badge">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                    <span style="font-weight: 800; color: white;">v1.0</span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">Marzo 9, 2026</span>
+                                </div>
+                                <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
+                                    <li>Nacimiento del proyecto en EsJS.</li>
+                                    <li>Migración a JavaScript puro y adopción de Bun como runtime principal.</li>
                                 </ul>
                             </div>
                         </div>

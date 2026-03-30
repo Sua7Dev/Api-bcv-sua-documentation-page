@@ -60,30 +60,19 @@ Para garantizar la estabilidad del servicio, la generación de API Keys requiere
 - `style.css`: Sistema de diseño global y animaciones.
 - `docs.js`: Lógica de la documentación y gestión de estado de sesión.
 
-## 📝 Changelog
+## Registro de Cambios (Timeline)
 
-### v1.5.1 (2026-03-30): Gestión de Ciclo de Vida
-- **Deprecaciones**: Desplazamiento de `/v1/estado` y `/v1/historicos/*` a la sección de Endpoints Deprecados.
-- **Refactor de Docs**: Sustitución de la sección Históricos por Deprecados para mayor claridad técnica.
-- **Limpieza de UI**: Eliminación de rutas heredadas en la tabla de endpoints de la Landing Page.
-
-### v1.5.0 (2026-03-30): Gran Actualización de Endpoints
-- **Nuevos Endpoints**: Despliegue de 9 variaciones para USD y EUR (Oficial, Paralelo y Combinados).
-- **Rutas Pro**: Introducción de `/v1/usd-all`, `/v1/eur-all`, `/v1/cotizaciones-par`, etc.
-- **Documentación**: Actualización masiva de la guía técnica y ejemplos en JS, Dart y Python.
-- **Sincronización**: Nueva lógica de filtrado para fines de semana y manejo de valor anterior.
-
-### v1.4.0 (2026-03-14): Pulido final de responsividad y diseño.
-- Implementación de tipografía fluida (`clamp`) para el hero section.
-- Corrección de desbordamiento horizontal en dispositivos móviles de 6.6".
-- Centrado y optimización de la documentación para monitores de 24" y resoluciones ultra-wide.
-- Reposicionamiento del menú móvil para evitar solapamientos.
+- **v1.5 (Marzo 28-30, 2026)**: Nuevos endpoints (`/v1/...-par`, `/v1/...-all`), corrección de lógica de fin de semana, limpieza de endpoints deprecados y optimización móvil integral.
+- **v1.4 (Marzo 26, 2026)**: Lógica de persistencia diaria hasta medianoche, arreglos en workflows de cron y funciones edge.
+- **v1.3 (Marzo 21, 2026)**: Migración de base de datos a Turso (LibSQL) y corrección de actualización de montos.
+- **v1.2 (Marzo 14, 2026)**: Agregado `valorAnterior` y `fechaAnterior`, normalización de nombres y validación de API-KEYS.
+- **v1.1 (Marzo 10, 2026)**: Despliegue oficial en Vercel, implementación de API-KEYS y rate limiting.
+- **v1.0 (Marzo 9, 2026)**: Inicio del proyecto en EsJS, migración a Javascript puro y Bun runtime.
 - Mejora de contraste en textos primarios y secundarios.
 ### v1.3.1 (2026-03-14): Solución de problemas críticos de UI y responsividad.
 - **Floating Auth**: Rediseño del botón de login como un chip flotante en la esquina superior derecha.
 - **Responsividad Crítica**: Mejoras en media queries para PC, Laptop, Tablet y Móvil.
 - **UX en Documentación**: Añadida sección de "Endpoints" y mejoras de contraste en botones de GitHub.
-- **Side Menu**: Transformación del sidebar en un menú lateral (drawer) para dispositivos móviles.
 
 ### v1.3.0 (Marzo 2026) - El Update de Seguridad
 - **Sistema de Autenticación**: Integración completa de GitHub OAuth.
