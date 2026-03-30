@@ -49,7 +49,7 @@
                 <div class="hero-content">
                     <div class="badge">
                         <span class="dot-pulse"></span>
-                        v1.2.0 Ya disponible
+                        v1.5.0 Ya disponible
                     </div>
                     <h1>API <span>SUA-BCV</span>: Datos cambiarios en tiempo real</h1>
                     <p>Optimizado para Bun y desplegado en el Edge. Obtén las tasas oficiales del BCV con latencia mínima y máxima confiabilidad.</p>
@@ -84,12 +84,11 @@
 <span class="code-func">console</span>.<span class="code-func">log</span>(data);
 <div class="code-output-block"><span class="code-comment">// Output:</span>
 {
-  <span class="code-key">"fuente"</span>: <span class="code-val">Oficial</span>,
-  <span class="code-key">"nombre"</span>: <span class="code-string">"Oficial"</span>,
-  <span class="code-key">"valor"</span>: <span class="code-string">"445.20"</span>,
-  <span class="code-key">"fechaActualizacion"</span>: <span class="code-string">"..."</span>,
-  <span class="code-key">"valorAnterior"</span>: <span class="code-string">"..."</span>,
-  <span class="code-key">"fechaAnterior"</span>: <span class="code-string">"..."</span>
+  <span class="code-key">"fuente"</span>: <span class="code-string">"BCV"</span>,
+  <span class="code-key">"nombre"</span>: <span class="code-string">"Dólar BCV"</span>,
+  <span class="code-key">"valor"</span>: <span class="code-string">"44.52"</span>,
+  <span class="code-key">"fechaActualizacion"</span>: <span class="code-string">"2024-05-20T..."</span>,
+  <span class="code-key">"valorAnterior"</span>: <span class="code-string">"44.40"</span>
 }</div></code></pre>
                         </div>
                     </div>
@@ -146,37 +145,55 @@
                     <div class="endpoint-row">
                         <span class="method-tag">GET</span>
                         <code class="endpoint-path">/v1/usd</code>
-                        <span class="endpoint-desc">Tasa oficial Dólar BCV + Paralelo</span>
+                        <span class="endpoint-desc">Tasa Oficial BCV — Dólar</span>
+                        <div class="status-dot online"></div>
+                    </div>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/usd-par</code>
+                        <span class="endpoint-desc">Tasa Paralelo — Dólar</span>
+                        <div class="status-dot online"></div>
+                    </div>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/usd-all</code>
+                        <span class="endpoint-desc">Tasa Oficial y Paralelo — Dólar</span>
                         <div class="status-dot online"></div>
                     </div>
                     <div class="endpoint-row">
                         <span class="method-tag">GET</span>
                         <code class="endpoint-path">/v1/eur</code>
-                        <span class="endpoint-desc">Tasa oficial Euro BCV</span>
+                        <span class="endpoint-desc">Tasa Oficial BCV — Euro</span>
+                        <div class="status-dot online"></div>
+                    </div>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/eur-par</code>
+                        <span class="endpoint-desc">Tasa Paralelo BCV — Euro</span>
+                        <div class="status-dot online"></div>
+                    </div>
+                    <div class="endpoint-row">
+                        <span class="method-tag">GET</span>
+                        <code class="endpoint-path">/v1/eur-all</code>
+                        <span class="endpoint-desc">Tasa Oficial y Paralelo BCV — Euro</span>
                         <div class="status-dot online"></div>
                     </div>
                     <div class="endpoint-row">
                         <span class="method-tag">GET</span>
                         <code class="endpoint-path">/v1/cotizaciones</code>
-                        <span class="endpoint-desc">Todas las tasas disponibles</span>
+                        <span class="endpoint-desc">Resumen Oficial (USD + EUR)</span>
                         <div class="status-dot online"></div>
                     </div>
                     <div class="endpoint-row">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/estado</code>
-                        <span class="endpoint-desc">Estado de sincronización</span>
+                        <code class="endpoint-path">/v1/cotizaciones-par</code>
+                        <span class="endpoint-desc">Resumen Paralelo (USD + EUR)</span>
                         <div class="status-dot online"></div>
                     </div>
                     <div class="endpoint-row">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/historicos/dolares</code>
-                        <span class="endpoint-desc">Histórico completo (USD)</span>
-                        <div class="status-dot online"></div>
-                    </div>
-                    <div class="endpoint-row">
-                        <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/historicos/euros</code>
-                        <span class="endpoint-desc">Histórico completo (EUR)</span>
+                        <code class="endpoint-path">/v1/cotizaciones-all</code>
+                        <span class="endpoint-desc">Todas las fuentes combinadas</span>
                         <div class="status-dot online"></div>
                     </div>
                 </div>

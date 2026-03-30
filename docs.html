@@ -253,6 +253,7 @@
                     <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Venezuela — Cotizaciones</h2>
                     
                     <div class="endpoints-list">
+                        <!-- USD -->
                         <div class="endpoint-item">
                             <div class="endpoint-main">
                                 <div class="endpoint-route">
@@ -261,7 +262,7 @@
                                     <span class="path">/usd</span>
                                 </div>
                                 <div class="endpoint-info">
-                                    <p>Cotización del Dólar (BCV Oficial + Paralelo/Yadio)</p>
+                                    <p><b>Oficial</b>: Tasa BCV para el Dólar</p>
                                 </div>
                                 <button class="btn-try" data-path="/v1/usd">Probar</button>
                             </div>
@@ -272,10 +273,40 @@
                                 <div class="endpoint-route">
                                     <span class="method">GET</span>
                                     <span class="base">.../v1</span>
+                                    <span class="path">/usd-par</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p><b>Paralelo</b>: Tasa para el Dólar (Promedio/Yadio)</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/usd-par">Probar</button>
+                            </div>
+                            <div class="response-area"></div>
+                        </div>
+                        <div class="endpoint-item">
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
+                                    <span class="path">/usd-all</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p><b>Todo</b>: Todas las fuentes del Dólar</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/usd-all">Probar</button>
+                            </div>
+                            <div class="response-area"></div>
+                        </div>
+
+                        <!-- EUR -->
+                        <div class="endpoint-item">
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
                                     <span class="path">/eur</span>
                                 </div>
                                 <div class="endpoint-info">
-                                    <p>Cotización del Euro (BCV Oficial + Paralelo)</p>
+                                    <p><b>Oficial</b>: Tasa BCV para el Euro</p>
                                 </div>
                                 <button class="btn-try" data-path="/v1/eur">Probar</button>
                             </div>
@@ -286,10 +317,40 @@
                                 <div class="endpoint-route">
                                     <span class="method">GET</span>
                                     <span class="base">.../v1</span>
+                                    <span class="path">/eur-par</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p><b>Paralelo</b>: Tasa paralela para el Euro</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/eur-par">Probar</button>
+                            </div>
+                            <div class="response-area"></div>
+                        </div>
+                        <div class="endpoint-item">
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
+                                    <span class="path">/eur-all</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p><b>Todo</b>: Todas las fuentes del Euro</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/eur-all">Probar</button>
+                            </div>
+                            <div class="response-area"></div>
+                        </div>
+
+                        <!-- Cotizaciones -->
+                        <div class="endpoint-item">
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
                                     <span class="path">/cotizaciones</span>
                                 </div>
                                 <div class="endpoint-info">
-                                    <p>Todas las cotizaciones disponibles en un solo objeto</p>
+                                    <p><b>Resumen Oficial</b>: Solo tasas BCV (USD + EUR)</p>
                                 </div>
                                 <button class="btn-try" data-path="/v1/cotizaciones">Probar</button>
                             </div>
@@ -300,10 +361,40 @@
                                 <div class="endpoint-route">
                                     <span class="method">GET</span>
                                     <span class="base">.../v1</span>
+                                    <span class="path">/cotizaciones-par</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p><b>Resumen Paralelo</b>: Solo tasas paralelas</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/cotizaciones-par">Probar</button>
+                            </div>
+                            <div class="response-area"></div>
+                        </div>
+                        <div class="endpoint-item">
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
+                                    <span class="path">/cotizaciones-all</span>
+                                </div>
+                                <div class="endpoint-info">
+                                    <p><b>Todo</b>: Todas las fuentes de USD y EUR juntas</p>
+                                </div>
+                                <button class="btn-try" data-path="/v1/cotizaciones-all">Probar</button>
+                            </div>
+                            <div class="response-area"></div>
+                        </div>
+                        
+                        <!-- System -->
+                        <div class="endpoint-item">
+                            <div class="endpoint-main">
+                                <div class="endpoint-route">
+                                    <span class="method">GET</span>
+                                    <span class="base">.../v1</span>
                                     <span class="path">/estado</span>
                                 </div>
                                 <div class="endpoint-info">
-                                    <p>Estado del servicio y última actualización</p>
+                                    <p>Estado del servicio y última actualización del sistema</p>
                                 </div>
                                 <button class="btn-try" data-path="/v1/estado">Probar</button>
                             </div>
@@ -368,18 +459,16 @@
 <span style="color: #c084fc;">const</span> id = <span style="color: #60a5fa;">setTimeout</span>(() => controller.<span style="color: #60a5fa;">abort</span>(), <span style="color: #fb923c;">15000</span>);
 
 <span style="color: #64748b;">// 2. Realizar petición segura a la API</span>
-<span style="color: #c084fc;">const</span> respuesta = <span style="color: #c084fc;">await</span> <span style="color: #60a5fa;">fetch</span>(<span style="color: #4ade80;">`${API_URL}/v1/cotizaciones`</span>, {
-  <span style="color: #fb923c;">headers</span>: { <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">API_KEY</span> },
-  <span style="color: #fb923c;">signal</span>: controller.<span style="color: #fb923c;">signal</span> <span style="color: #64748b;">// Vincula el control de aborto</span>
+<span style="color: #c084fc;">const</span> respuesta = <span style="color: #c084fc;">await</span> <span style="color: #60a5fa;">fetch</span>(<span style="color: #4ade80;">'https://api-bcv-sua.vercel.app/v1/usd'</span>, {
+  <span style="color: #fb923c;">headers</span>: { <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">'TU_API_KEY'</span> },
+  <span style="color: #fb923c;">signal</span>: controller.<span style="color: #fb923c;">signal</span>
 });
 
-<span style="color: #60a5fa;">clearTimeout</span>(id); <span style="color: #64748b;">// 3. Limpiar temporizador si la API respondió</span>
+<span style="color: #60a5fa;">clearTimeout</span>(id);
 
-<span style="color: #64748b;">// 4. Procesar datos y buscar el Dólar (USD)</span>
+<span style="color: #64748b;">// 3. Procesar datos</span>
 <span style="color: #c084fc;">const</span> datos = <span style="color: #c084fc;">await</span> respuesta.<span style="color: #60a5fa;">json</span>();
-<span style="color: #c084fc;">const</span> dolar = datos.<span style="color: #60a5fa;">find</span>(c => c.<span style="color: #fb923c;">moneda</span> === <span style="color: #4ade80;">'USD'</span>);
-
-<span style="color: #60a5fa;">console</span>.<span style="color: #60a5fa;">log</span>(<span style="color: #4ade80;">`Tasa Actualizada: Bs. ${dolar.valor}`</span>);</pre>
+<span style="color: #60a5fa;">console</span>.<span style="color: #60a5fa;">log</span>(<span style="color: #4ade80;">`Tasa BCV: Bs. ${datos.valor}`</span>);</pre>
 </div>
                     </div>
                     <div class="converter-container" style="margin-top: 40px; background: rgba(30, 41, 59, 0.5); padding: 24px; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.2); backdrop-filter: blur(10px);">
@@ -438,8 +527,8 @@ Future&lt;<span style="color: #c084fc;">void</span>&gt; <span style="color: #60a
   );
 
   <span style="color: #c084fc;">if</span> (res.statusCode == <span style="color: #fb923c;">200</span>) {
-    <span style="color: #c084fc;">final</span> List data = <span style="color: #60a5fa;">jsonDecode</span>(res.body);
-    <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">'Tasa oficial: $ {data[0]["valor"]}'</span>);
+    <span style="color: #c084fc;">final</span> data = <span style="color: #60a5fa;">jsonDecode</span>(res.body);
+    <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">'Tasa oficial: ${data["valor"]}'</span>);
   }
 }</pre>
                         </div>
@@ -468,8 +557,7 @@ headers = { <span style="color: #4ade80;">"x-api-key"</span>: <span style="color
 response = requests.<span style="color: #60a5fa;">get</span>(url, headers=headers)
 data = response.<span style="color: #60a5fa;">json</span>()
 
-<span style="color: #c084fc;">for</span> rate <span style="color: #c084fc;">in</span> data:
-    <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">f"{rate['nombre']}: {rate['valor']}"</span>)</pre>
+<span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">f"{data['nombre']}: {data['valor']}"</span>)</pre>
                         </div>
                     </div>
                 </section>
@@ -478,6 +566,22 @@ data = response.<span style="color: #60a5fa;">json</span>()
                 <section id="changelog">
                     <h2 style="font-size: 1.75rem; margin-bottom: 40px;">Registro de Cambios</h2>
                     <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: var(--primary); box-shadow: 0 0 15px var(--primary);"></div>
+                            <div class="version-badge">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                    <span style="font-weight: 800; color: white;">v1.3.0</span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">2025-03-30</span>
+                                </div>
+                                <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
+                                    <li>Nuevos Endpoints: Soporte para tasas paralelas (USD/EUR) y combinadas (-par, -all).</li>
+                                    <li>Estructura de Respuesta: Optimización de campos `valorAnterior` y fechas efectivas.</li>
+                                    <li>Seguridad: Mejora en la validación de API Keys contra Turso.</li>
+                                    <li>Filtro Inteligente: Lógica avanzada para fines de semana y cierre bancario.</li>
+                                </ul>
+                            </div>
+                        </div>
+
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
                             <div class="version-badge">

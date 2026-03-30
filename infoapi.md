@@ -1,0 +1,165 @@
+# API SUA-BCV 🚀
+
+API oficial de SUA para la consulta de tipos de cambio (BCV, Paralelo, etc.) en Venezuela. Migrada de EsJs a JavaScript puro con Edge Runtime en Vercel.
+
+## 🛠️ Stack Tecnológico
+
+| Tecnología                                                                | Uso                                      |
+| ------------------------------------------------------------------------- | ---------------------------------------- |
+| [Bun](https://bun.sh/)                                                    | Runtime y gestor de paquetes (exclusivo) |
+| [Hono](https://hono.dev/)                                                 | Framework HTTP (Edge-compatible)         |
+| [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) | Despliegue en el Edge global             |
+| [Upstash Redis](https://upstash.com/)                                     | Rate Limiting (60 req/min por IP)        |
+| [Axiom](https://axiom.co/)                                                | Observabilidad y logs estructurados      |
+| [GitHub Actions](https://github.com/features/actions)                     | Cron jobs automáticos cada 30 minutos    |
+
+---
+
+## 📡 Endpoints
+
+**Base URL:** `https://api-bcv-sua.vercel.app`
+
+> ⚠️ Todas las rutas `/v1/*` requieren el header `x-api-key: TU_CLAVE`.
+
+### Diagnóstico
+
+| Método | Ruta    | Descripción                                                     |
+| ------ | ------- | --------------------------------------------------------------- |
+| `GET`  | `/ping` | Health check. Devuelve `{"status":"ok"}` si la API está activa. |
+
+### Venezuela — Cotizaciones en tiempo real
+
+| Método | Ruta                   | Descripción                                           |
+| ------ | ---------------------- | ----------------------------------------------------- |
+| `GET`  | `/v1/usd`              | **Oficial**: Tasa BCV para el Dólar                   |
+| `GET`  | `/v1/usd-par`          | **Paralelo**: Tasa paralela/promedio para el Dólar    |
+| `GET`  | `/v1/usd-all`          | **Todo**: Todas las fuentes disponibles para el Dólar |
+| `GET`  | `/v1/eur`              | **Oficial**: Tasa BCV para el Euro                    |
+| `GET`  | `/v1/eur-par`          | **Paralelo**: Tasa paralela para el Euro              |
+| `GET`  | `/v1/eur-all`          | **Todo**: Todas las fuentes disponibles para el Euro  |
+| `GET`  | `/v1/cotizaciones`     | **Oficial**: Solo tasas oficiales (BCV) de USD y EUR  |
+| `GET`  | `/v1/cotizaciones-par` | **Paralelo**: Solo tasas paralelas de USD y EUR       |
+| `GET`  | `/v1/cotizaciones-all` | **Todo**: Todas las fuentes de USD y EUR juntas       |
+
+---
+
+## 🔒 Seguridad
+
+- **API Key Dinámica:** Todas las rutas `/v1/*` requieren el header `x-api-key`. Las llaves se validan contra una base de datos en **Turso**, permitiendo gestionar fechas de expiración y revocación.
+- **Gestión de Claves:** Puedes generar nuevas claves usando el script CLI incluido:
+  ```bash
+  bun run scripts/generar-api-key.js --name "Cliente X" --days 30
+  ```
+- **Filtro de Fin de Semana:** La API mantiene la tasa del viernes durante el sábado y domingo para evitar discrepancias en cierre bancario.
+
+### ⚠️ Códigos de Error de Autenticación
+
+Todas las respuestas de error de autenticación siguen el formato:
+
+```json
+{
+  "status": "error",
+  "error": {
+    "code": "EL_CODIGO",
+    "mensaje": "Descripción...",
+    "doc_url": "https://api-sua-bcv.vercel.app/docs/auth#EL_CODIGO"
+  }
+}
+```
+
+| Código            | Status | Descripción                                        |
+| ----------------- | ------ | -------------------------------------------------- |
+| `api_key_missing` | 401    | No se proporcionó la clave en los headers.         |
+| `api_key_invalid` | 401    | La clave no existe o es incorrecta.                |
+| `api_key_expired` | 403    | La clave ha superado su fecha de vencimiento.      |
+| `api_key_revoked` | 403    | La clave ha sido desactivada por el administrador. |
+
+---
+
+## 💻 Desarrollo Local
+
+### Requisitos
+
+- [Bun](https://bun.sh/) instalado
+
+### Instalación
+
+```bash
+bun install
+```
+
+### Variables de entorno (`.env`)
+
+Copia `.env.example` a `.env` y completa:
+
+```env
+# API Key para proteger los endpoints
+VITE_API_KEY="tu_clave_secreta"
+
+# Redis para Rate Limiting (Upstash)
+UPSTASH_REDIS_REST_URL="https://..."
+UPSTASH_REDIS_REST_TOKEN="..."
+
+# GitHub — Para trigger de crons
+VITE_GITHUB_TOKEN="ghp_..."
+
+# Axiom — Observabilidad
+VITE_AXIOM_TOKEN="xaat-..."
+VITE_AXIOM_ORG_ID="..."
+VITE_AXIOM_DATASET="..."
+```
+
+### Comandos
+
+```bash
+bun dev           # Servidor de desarrollo en localhost:5173
+bun run build     # Build completo (docs + API)
+bun run cron:run  # Ejecutar scrapers manualmente
+```
+
+### Prueba de la API
+
+```bash
+bun run tests/test.api.js
+```
+
+### Prueba de la API en local
+
+#### Inicia el servidor en una terminal.
+
+```bash
+bun dev
+```
+
+#### En otra terminal ejecuta.
+
+```bash
+bun run tests/test.local.js
+```
+
+---
+
+## 🚀 Despliegue en Vercel
+
+1. Conecta el repositorio en [vercel.com/new](https://vercel.com/new).
+2. En **Settings → Environment Variables**, añade todas las variables del `.env`.
+3. Haz `git push` — Vercel despliega automáticamente.
+
+---
+
+## ⚙️ Automatización (GitHub Actions)
+
+El workflow `.github/workflows/cron.yml` se ejecuta automáticamente **cada 30 minutos** para actualizar los precios desde BCV y Yadio. También puede ejecutarse manualmente desde la pestaña **Actions** de GitHub.
+
+Requiere los siguientes **Secrets** en el repositorio:
+`VITE_API_KEY`, `VITE_GITHUB_TOKEN`, `VITE_AXIOM_TOKEN`, `VITE_AXIOM_ORG_ID`, `VITE_AXIOM_DATASET`, `VITE_DATABASE_URL`, `VITE_DATABASE_AUTH_TOKEN`
+
+---
+
+## 📅 Lógica de Fin de Semana y Tasas Futuras
+
+Para garantizar la estabilidad en la facturación y coherencia con el mercado bancario:
+
+- **Extracción de Fecha Valor:** El scraper extrae la fecha efectiva ("Fecha Valor") directamente del sitio web del BCV. Si el viernes por la tarde el BCV publica la tasa para el lunes, esta se guarda con fecha de lunes.
+- **Filtro de Fin de Semana:** Durante sábados y domingos, la API ignora automáticamente cualquier tasa futura (del lunes) y continúa sirviendo la tasa que fue válida para el **viernes**.
+- **Valor Anterior Histórico:** El campo `valorAnterior` ahora busca siempre el último registro de un **día distinto** al actual. Esto garantiza una comparación útil día a día y evita que el valor anterior sea idéntico al actual en caso de múltiples actualizaciones en una misma jornada.

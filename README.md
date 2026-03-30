@@ -62,6 +62,12 @@ Para garantizar la estabilidad del servicio, la generación de API Keys requiere
 
 ## 📝 Changelog
 
+### v1.5.0 (2026-03-30): Gran Actualización de Endpoints
+- **Nuevos Endpoints**: Despliegue de 9 variaciones para USD y EUR (Oficial, Paralelo y Combinados).
+- **Rutas Pro**: Introducción de `/v1/usd-all`, `/v1/eur-all`, `/v1/cotizaciones-par`, etc.
+- **Documentación**: Actualización masiva de la guía técnica y ejemplos en JS, Dart y Python.
+- **Sincronización**: Nueva lógica de filtrado para fines de semana y manejo de valor anterior.
+
 ### v1.4.0 (2026-03-14): Pulido final de responsividad y diseño.
 - Implementación de tipografía fluida (`clamp`) para el hero section.
 - Corrección de desbordamiento horizontal en dispositivos móviles de 6.6".
