@@ -77,9 +77,9 @@
                         <span class="material-symbols-outlined">payments</span>
                         Cotizaciones VZLA
                     </a>
-                    <a href="#venezuela-historicos" class="nav-link">
-                        <span class="material-symbols-outlined">history</span>
-                        Históricos VZLA
+                    <a href="#endpoints-deprecados" class="nav-link">
+                        <span class="material-symbols-outlined">delete_sweep</span>
+                        Deprecados
                     </a>
                 </div>
 
@@ -384,8 +384,16 @@
                             </div>
                             <div class="response-area"></div>
                         </div>
-                        
-                        <!-- System -->
+                    </div>
+                </section>
+
+                <!-- Endpoints Deprecados -->
+                <section id="endpoints-deprecados" style="margin-bottom: 80px;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px; color: #f87171;">Endpoints Deprecados</h2>
+                    <p style="margin-bottom: 24px;">Estos endpoints serán eliminados en futuras versiones. No los uses en nuevos proyectos.</p>
+                    
+                    <div class="endpoints-list">
+                        <!-- Estado -->
                         <div class="endpoint-item">
                             <div class="endpoint-main">
                                 <div class="endpoint-route">
@@ -394,20 +402,14 @@
                                     <span class="path">/estado</span>
                                 </div>
                                 <div class="endpoint-info">
-                                    <p>Estado del servicio y última actualización del sistema</p>
+                                    <p>Estado del servicio y última actualización del sistema (Deprecado).</p>
                                 </div>
                                 <button class="btn-try" data-path="/v1/estado">Probar</button>
                             </div>
                             <div class="response-area"></div>
                         </div>
-                    </div>
-                </section>
 
-                <!-- Venezuela Historicos -->
-                <section id="venezuela-historicos" style="margin-bottom: 80px;">
-                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Venezuela — Históricos</h2>
-                    
-                    <div class="endpoints-list">
+                        <!-- Historicos Dolares -->
                         <div class="endpoint-item">
                             <div class="endpoint-main">
                                 <div class="endpoint-route">
@@ -416,12 +418,14 @@
                                     <span class="path">/historicos/dolares</span>
                                 </div>
                                 <div class="endpoint-info">
-                                    <p>Histórico completo de cotizaciones del Dólar</p>
+                                    <p>Histórico completo de cotizaciones del Dólar (Deprecado).</p>
                                 </div>
                                 <button class="btn-try" data-path="/v1/historicos/dolares">Probar</button>
                             </div>
                             <div class="response-area"></div>
                         </div>
+
+                        <!-- Historicos Euros -->
                         <div class="endpoint-item">
                             <div class="endpoint-main">
                                 <div class="endpoint-route">
@@ -430,7 +434,7 @@
                                     <span class="path">/historicos/euros</span>
                                 </div>
                                 <div class="endpoint-info">
-                                    <p>Histórico completo de cotizaciones del Euro</p>
+                                    <p>Histórico completo de cotizaciones del Euro (Deprecado).</p>
                                 </div>
                                 <button class="btn-try" data-path="/v1/historicos/euros">Probar</button>
                             </div>
@@ -570,6 +574,20 @@ data = response.<span style="color: #60a5fa;">json</span>()
                             <div class="timeline-dot" style="background: var(--primary); box-shadow: 0 0 15px var(--primary);"></div>
                             <div class="version-badge">
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                    <span style="font-weight: 800; color: white;">v1.5.1</span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">2025-03-30</span>
+                                </div>
+                                <ul style="list-style: disc; padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
+                                    <li>Limpieza de Endpoints: Se movieron `/v1/estado` y `/v1/historicos/*` a la sección de Deprecados.</li>
+                                    <li>Refactor de Arquitectura: Reemplazo de sección 'Históricos' por 'Deprecados' para mejor ciclo de vida de la API.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="version-badge">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
                                     <span style="font-weight: 800; color: white;">v1.3.0</span>
                                     <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">2025-03-30</span>
                                 </div>
@@ -610,7 +628,7 @@ data = response.<span style="color: #60a5fa;">json</span>()
                 <a href="#endpoints" class="toc-link">Endpoints</a>
                 <a href="#diagnostico" class="toc-link">Diagnóstico</a>
                 <a href="#venezuela-realtime" class="toc-link">Cotizaciones</a>
-                <a href="#venezuela-historicos" class="toc-link">Históricos</a>
+                <a href="#endpoints-deprecados" class="toc-link">Deprecados</a>
                 <a href="#javascript" class="toc-link">JS Example</a>
                 <a href="#dart" class="toc-link">Dart Example</a>
                 <a href="#python" class="toc-link">Python Example</a>

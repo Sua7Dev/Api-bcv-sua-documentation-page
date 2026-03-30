@@ -62,6 +62,11 @@ Para garantizar la estabilidad del servicio, la generación de API Keys requiere
 
 ## 📝 Changelog
 
+### v1.5.1 (2026-03-30): Gestión de Ciclo de Vida
+- **Deprecaciones**: Desplazamiento de `/v1/estado` y `/v1/historicos/*` a la sección de Endpoints Deprecados.
+- **Refactor de Docs**: Sustitución de la sección Históricos por Deprecados para mayor claridad técnica.
+- **Limpieza de UI**: Eliminación de rutas heredadas en la tabla de endpoints de la Landing Page.
+
 ### v1.5.0 (2026-03-30): Gran Actualización de Endpoints
 - **Nuevos Endpoints**: Despliegue de 9 variaciones para USD y EUR (Oficial, Paralelo y Combinados).
 - **Rutas Pro**: Introducción de `/v1/usd-all`, `/v1/eur-all`, `/v1/cotizaciones-par`, etc.
