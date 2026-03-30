@@ -791,6 +791,8 @@ footer {
     border: 1px solid var(--card-border);
     border-radius: 12px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .endpoint-main {
@@ -803,12 +805,14 @@ footer {
 .endpoint-route {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 12px;
     background: #0a0a0a;
     padding: 8px 12px;
     border-radius: 8px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.9rem;
+    word-break: break-all;
 }
 
 .endpoint-route .method {
@@ -887,10 +891,11 @@ footer {
     border-radius: 8px;
     padding: 16px;
     max-height: 400px;
-    overflow-y: auto;
+    overflow: auto;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.85rem;
     color: #94a3b8;
+    white-space: pre;
 }
 
 /* Button Test (Probar) - Refined */
@@ -1485,13 +1490,16 @@ input#input-usd {
         box-shadow: 20px 0 50px rgba(0, 0, 0, 0.8);
         background: #0a0e14 !important;
         padding-top: 100px; /* Space for the closer toggle */
+        padding-bottom: 120px; /* Space to see the 'Volver al Inicio' button */
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
     }
 
     .sidebar-nav {
         flex: none; /* Avoid margin-top: auto pushing content out */
         height: auto;
+        padding-bottom: 40px;
     }
 
     .sidebar.active {
