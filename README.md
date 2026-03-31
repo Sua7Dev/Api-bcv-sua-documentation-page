@@ -150,6 +150,7 @@ console.log(data.valor);
 
 ## Registro de Cambios (Timeline)
 
+- **v1.7.2 (Marzo 31, 2026)**: Optimización crítica de responsividad. Corrección de alineación de botones CTA en landing page, forzado de una sola línea en endpoints móviles (con scroll horizontal) y aumento del breakpoint del Índice (TOC) a 1280px para evitar superposiciones en laptops pequeñas.
 - **v1.7.1 (Marzo 31, 2026)**: Añadida sección de **Errores Comunes** para resolver problemas de indexación de listas en Python, JS y Dart. Guía de configuración de entorno `.env` incluida.
 - **v1.7.0 (Marzo 31, 2026)**: Reestructuración de la documentación de Dart. Ejemplo migrado a **Console Application** con soporte para `dotenv`, múltiples archivos y comandos de ejecución detallados.
 - **v1.6.5 (Marzo 31, 2026)**: Arreglo definitivo de alineación global para PC y Mobile. Se forzó la expansión total de los elementos de endpoint para una interfaz uniforme y profesional. Limpieza de parámetros de caché en HTML.

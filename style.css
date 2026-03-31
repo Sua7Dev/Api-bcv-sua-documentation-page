@@ -1563,8 +1563,8 @@ input#input-usd {
     }
 }
 
-/* 2. Tablet (10") Optimization */
-@media (max-width: 1024px) {
+/* 2. Tablet & Small Laptop (Up to 1280px) Optimization */
+@media (max-width: 1280px) {
     :root {
         --toc-width: 0px;
     }
@@ -1734,8 +1734,9 @@ input#input-usd {
 
     /* REVAMPED Unified full-width endpoint UI on mobile */
     .endpoints-list .endpoint-item .endpoint-main {
-        padding: 16px 20px !important;
+        padding: 14px 16px !important;
         width: 100% !important;
+        gap: 12px !important;
     }
 
     .endpoints-list .endpoint-item .endpoint-main > div,
@@ -1743,5 +1744,27 @@ input#input-usd {
         width: 100% !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
+    }
+
+    .endpoint-route {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        font-size: 0.8rem !important;
+        padding: 6px 10px !important;
+    }
+
+    .endpoint-route::-webkit-scrollbar {
+        height: 0px;
+    }
+
+    .endpoint-path {
+        white-space: nowrap !important;
+        flex: none !important;
+    }
+
+    .cta-actions {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 20px;
     }
 }
