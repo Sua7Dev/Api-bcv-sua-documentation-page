@@ -1541,29 +1541,34 @@ input#input-usd {
 
 /* --- Responsiveness & Breakpoints (PC, Laptop, Tablet, Mobile) --- */
 
-/* 1. PC (24") & Laptop (15") Large Screen Optimization */
-@media (min-width: 1440px) {
-    .container {
-        max-width: 1300px;
-        margin: 0 auto;
-    }
+/* 1. Large Screen Optimization (Full Desktop) */
+@media (min-width: 1441px) {
     .docs-main {
-        max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 80px;
-        padding-right: 80px;
-        border-left: 1px solid var(--card-border);
+        max-width: 1000px;
+        margin-left: var(--sidebar-width);
+        margin-right: var(--toc-width);
+        padding: 80px 60px;
         border-right: 1px solid var(--card-border);
-        background: rgba(255, 255, 255, 0.01);
-    }
-    .docs-layout {
-        justify-content: center;
-        background: #06090c;
     }
 }
 
-/* 2. Tablet & Small Laptop (Up to 1280px) Optimization */
+/* 2. Transition Range (Small Laptops & Large Tablets) */
+@media (min-width: 1281px) and (max-width: 1440px) {
+    :root {
+        --toc-width: 0px; /* Hide TOC in this range to avoid overlap */
+    }
+    .toc {
+        display: none !important;
+    }
+    .docs-main {
+        margin-left: var(--sidebar-width);
+        margin-right: 0;
+        width: calc(100% - var(--sidebar-width)) !important;
+        max-width: none !important;
+    }
+}
+
+/* 3. Small Laptop & Tablet (Trigger hide sidebars if needed) */
 @media (max-width: 1280px) {
     :root {
         --toc-width: 0px;
