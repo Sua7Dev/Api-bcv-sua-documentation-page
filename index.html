@@ -19,6 +19,9 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="assets/logo.png">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
     <!-- Floating Auth UI (Top Right) -->
     <div id="floating-auth" class="floating-auth">
@@ -50,7 +53,7 @@
                 <div class="hero-content">
                     <div class="badge">
                         <span class="dot-pulse"></span>
-                        v1.5.0 Ya disponible
+                        v1.5 Ya disponible
                     </div>
                     <h1>API <span>SUA-BCV</span>: Datos cambiarios en tiempo real</h1>
                     <p>Optimizado para Bun y desplegado en el Edge. Obtén las tasas oficiales del BCV con latencia mínima y máxima confiabilidad.</p>
@@ -223,65 +226,65 @@
                 <p class="text-slate-400 mb-16" style="margin-bottom: 18px;">Estructura de rutas simple y predecible para una integración rápida.</p>
                 
                 <div class="endpoints-stack">
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/ping</code>
-                        <span class="endpoint-desc">Health check del servicio</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/ping</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Health check del servicio</span>
                     </div>
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/usd</code>
-                        <span class="endpoint-desc">Tasa Oficial BCV — Dólar</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/v1/usd</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Tasa Oficial BCV — Dólar</span>
                     </div>
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/usd-par</code>
-                        <span class="endpoint-desc">Tasa Paralelo — Dólar</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/v1/usd-par</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Tasa Paralelo — Dólar</span>
                     </div>
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/usd-all</code>
-                        <span class="endpoint-desc">Tasa Oficial y Paralelo — Dólar</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/v1/usd-all</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Tasa Oficial y Paralelo — Dólar</span>
                     </div>
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/eur</code>
-                        <span class="endpoint-desc">Tasa Oficial BCV — Euro</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/v1/eur</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Tasa Oficial BCV — Euro</span>
                     </div>
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/eur-par</code>
-                        <span class="endpoint-desc">Tasa Paralelo BCV — Euro</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/v1/eur-par</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Tasa Paralelo BCV — Euro</span>
                     </div>
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/eur-all</code>
-                        <span class="endpoint-desc">Tasa Oficial y Paralelo BCV — Euro</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/v1/eur-all</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Tasa Oficial y Paralelo BCV — Euro</span>
                     </div>
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/cotizaciones</code>
-                        <span class="endpoint-desc">Resumen Oficial (USD + EUR)</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/v1/cotizaciones</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Resumen Oficial (USD + EUR)</span>
                     </div>
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/cotizaciones-par</code>
-                        <span class="endpoint-desc">Resumen Paralelo (USD + EUR)</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/v1/cotizaciones-par</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Resumen Paralelo (USD + EUR)</span>
                     </div>
-                    <div class="endpoint-row">
+                    <div class="endpoint-row flex flex-wrap md:flex-nowrap items-center gap-x-4">
                         <span class="method-tag">GET</span>
-                        <code class="endpoint-path">/v1/cotizaciones-all</code>
-                        <span class="endpoint-desc">Todas las tasas</span>
-                        <div class="status-dot online"></div>
+                        <code class="endpoint-path mr-auto md:mr-0">/v1/cotizaciones-all</code>
+                        <div class="status-dot online order-3 md:order-last ml-auto md:ml-0"></div>
+                        <span class="endpoint-desc w-full md:w-auto order-last md:order-none mt-2 md:mt-0">Todas las tasas</span>
                     </div>
                 </div>
             </div>

@@ -75,6 +75,7 @@ Para garantizar la estabilidad del servicio, la generación de API Keys requiere
 
 ## Registro de Cambios (Timeline)
 
+- **v1.6.1 (Marzo 31, 2026)**: Mejora crítica de responsividad en la lista de endpoints de la landing page (layout apilado en móvil) e integración de Tailwind CSS via CDN.
 - **v1.6 (Marzo 30, 2026)**: Implementación de sección de Precios y soporte vía WhatsApp, destacando el plan "Permanente" con acceso ilimitado.
 - **v1.5 (Marzo 28-29, 2026)**: Nuevos endpoints (`/v1/...-par`, `/v1/...-all`), corrección de lógica de fin de semana, limpieza de endpoints deprecados y optimización móvil integral.
 
