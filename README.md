@@ -75,7 +75,8 @@ Para garantizar la estabilidad del servicio, la generación de API Keys requiere
 
 ## Registro de Cambios (Timeline)
 
-- **v1.6.3 (Marzo 31, 2026)**: Unificación de anchos para los elementos de endpoint en la documentación móvil, garantizando simetría y legibilidad.
+- **v1.6.5 (Marzo 31, 2026)**: Arreglo definitivo de alineación global para PC y Mobile. Se forzó la expansión total de los elementos de endpoint para una interfaz uniforme y profesional. Limpieza de parámetros de caché en HTML.
+- **v1.6.4 (Marzo 31, 2026)**: Unificación global de anchos para los elementos de endpoint (PC y Móvil), garantizando una estética "bloqueada" y profesional en todas las resoluciones.
 - **v1.6.2 (Marzo 31, 2026)**: Corrección de desbordamiento de JSON en los tests de la documentación para dispositivos móviles.
 - **v1.6.1 (Marzo 31, 2026)**: Mejora crítica de responsividad en la lista de endpoints de la landing page (layout apilado en móvil) e integración de Tailwind CSS via CDN.
 - **v1.6 (Marzo 30, 2026)**: Implementación de sección de Precios y soporte vía WhatsApp, destacando el plan "Permanente" con acceso ilimitado.
