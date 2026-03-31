@@ -1545,10 +1545,12 @@ input#input-usd {
 @media (min-width: 1441px) {
     .docs-main {
         max-width: 1000px;
-        margin-left: var(--sidebar-width);
-        margin-right: var(--toc-width);
+        margin-left: auto !important;
+        margin-right: auto !important;
         padding: 80px 60px;
+        border-left: 1px solid var(--card-border);
         border-right: 1px solid var(--card-border);
+        background: rgba(255, 255, 255, 0.01);
     }
 }
 
