@@ -72,9 +72,63 @@ Para garantizar la estabilidad del servicio, la generación de API Keys requiere
 - `docs.html`: Documentación técnica e interfaz de pruebas.
 - `style.css`: Sistema de diseño global y animaciones.
 - `docs.js`: Lógica de la documentación y gestión de estado de sesión.
+- `style.css`: Sistema de diseño global y animaciones.
+
+## 📖 Ejemplo de Integración (Dart Console)
+
+Estructura modular recomendada para una aplicación de consola:
+
+### 1. `lib/mian.dart` (Lógica de API)
+```dart
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:dotenv/dotenv.dart';
+
+Future<void> getRates(DotEnv env) async {
+  final apiKey = env['API_KEY'] ?? '';
+  final res = await http.get(
+    Uri.parse('https://api-bcv-sua.vercel.app/v1/usd'),
+    headers: {'x-api-key': apiKey},
+  );
+
+  if (res.statusCode == 200) {
+    final data = jsonDecode(res.body);
+    if (data is List && data.isNotEmpty) {
+      print('Tasa oficial: \$${data[0]["valor"]}');
+    }
+  }
+}
+```
+
+### 2. `bin/mian.dart` (Entry Point)
+```dart
+import 'package:dotenv/dotenv.dart';
+import 'package:main/mian.dart';
+
+final env = DotEnv()..load();
+
+Future<void> main() async {
+  await getRates(env);
+}
+```
+
+### 3. `pubspec.yaml`
+```yaml
+dependencies:
+  dotenv: ^4.2.0
+  http: ^1.6.0
+  path: ^1.9.0
+```
+
+### Comandos
+```bash
+flutter pub get  # Instalar dependencias
+dart run         # Ejecutar script
+```
 
 ## Registro de Cambios (Timeline)
 
+- **v1.7.0 (Marzo 31, 2026)**: Reestructuración de la documentación de Dart. Ejemplo migrado a **Console Application** con soporte para `dotenv`, múltiples archivos y comandos de ejecución detallados.
 - **v1.6.5 (Marzo 31, 2026)**: Arreglo definitivo de alineación global para PC y Mobile. Se forzó la expansión total de los elementos de endpoint para una interfaz uniforme y profesional. Limpieza de parámetros de caché en HTML.
 - **v1.6.4 (Marzo 31, 2026)**: Unificación global de anchos para los elementos de endpoint (PC y Móvil), garantizando una estética "bloqueada" y profesional en todas las resoluciones.
 - **v1.6.2 (Marzo 31, 2026)**: Corrección de desbordamiento de JSON en los tests de la documentación para dispositivos móviles.

@@ -513,10 +513,32 @@
 
                 <!-- Dart Example -->
                 <section id="dart" style="margin-bottom: 80px; margin-top: -170px;">
-                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Dart (Flutter)</h2>
-                    <div class="snippet-window">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 24px;">Dart (Console Application)</h2>
+                    <p style="margin-bottom: 24px;">Ejemplo de una aplicación de consola en Dart con soporte para variables de entorno y peticiones HTTP.</p>
+                    
+                    <h5 style="font-size: 1rem; margin-bottom: 12px; color: var(--primary);">pubspec.yaml</h5>
+                    <div class="snippet-window" style="margin-bottom: 24px;">
                         <div class="snippet-tabs">
-                            <div class="tab-btn active">main.dart</div>
+                            <div class="tab-btn active">pubspec.yaml</div>
+                            <div style="margin-left: auto; display: flex; align-items: center; padding-right: 20px;">
+                                <button class="copy-code-btn" style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="snippet-content">
+<pre style="color: #94a3b8;"><span style="color: #c084fc;">dependencies:</span>
+  <span style="color: #4ade80;">dotenv:</span> ^4.2.0
+  <span style="color: #4ade80;">http:</span> ^1.6.0
+  <span style="color: #4ade80;">path:</span> ^1.9.0</pre>
+                        </div>
+                    </div>
+
+                    <h5 style="font-size: 1rem; margin-bottom: 12px; color: var(--primary);">lib/mian.dart</h5>
+                    <div class="snippet-window" style="margin-bottom: 24px;">
+                        <div class="snippet-tabs">
+                            <div class="tab-btn active">lib/mian.dart</div>
                             <div style="margin-left: auto; display: flex; align-items: center; padding-right: 20px;">
                                 <button class="copy-code-btn" style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; align-items: center; gap: 4px; cursor: pointer;">
                                     <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
@@ -527,18 +549,60 @@
                         <div class="snippet-content">
 <pre style="color: #94a3b8;"><span style="color: #c084fc;">import</span> <span style="color: #4ade80;">'package:http/http.dart'</span> <span style="color: #c084fc;">as</span> http;
 <span style="color: #c084fc;">import</span> <span style="color: #4ade80;">'dart:convert'</span>;
+<span style="color: #c084fc;">import</span> <span style="color: #4ade80;">'package:dotenv/dotenv.dart'</span>;
 
-Future&lt;<span style="color: #c084fc;">void</span>&gt; <span style="color: #60a5fa;">getRates</span>() <span style="color: #c084fc;">async</span> {
+Future&lt;<span style="color: #c084fc;">void</span>&gt; <span style="color: #60a5fa;">getRates</span>(DotEnv env) <span style="color: #c084fc;">async</span> {
+  <span style="color: #64748b;">// Asegúrate de que dotenv esté inicializado antes de llamar a esta función</span>
+  <span style="color: #c084fc;">final</span> apiKey = env[<span style="color: #4ade80;">'API_KEY'</span>] ?? <span style="color: #4ade80;">''</span>;
+
   <span style="color: #c084fc;">final</span> res = <span style="color: #c084fc;">await</span> http.<span style="color: #60a5fa;">get</span>(
     Uri.<span style="color: #60a5fa;">parse</span>(<span style="color: #4ade80;">'https://api-bcv-sua.vercel.app/v1/usd'</span>),
-    headers: { <span style="color: #4ade80;">'x-api-key'</span>: <span style="color: #4ade80;">'TU_API_KEY'</span> }
+    headers: { <span style="color: #4ade80;">'x-api-key'</span>: apiKey }
   );
 
   <span style="color: #c084fc;">if</span> (res.statusCode == <span style="color: #fb923c;">200</span>) {
     <span style="color: #c084fc;">final</span> data = <span style="color: #60a5fa;">jsonDecode</span>(res.body);
-    <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">'Tasa oficial: ${data["valor"]}'</span>);
+    <span style="color: #c084fc;">if</span> (data <span style="color: #c084fc;">is</span> List &amp;&amp; data.isNotEmpty) {
+      <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">'Tasa oficial: \$${data[0]["valor"]}'</span>);
+    } <span style="color: #c084fc;">else</span> {
+      <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">'Respuesta inesperada: \$${res.body}'</span>);
+    }
+  } <span style="color: #c084fc;">else</span> {
+    <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">'Error: \$${res.statusCode}'</span>);
   }
 }</pre>
+                        </div>
+                    </div>
+
+                    <h5 style="font-size: 1rem; margin-bottom: 12px; color: var(--primary);">bin/mian.dart</h5>
+                    <div class="snippet-window" style="margin-bottom: 24px;">
+                        <div class="snippet-tabs">
+                            <div class="tab-btn active">bin/mian.dart</div>
+                            <div style="margin-left: auto; display: flex; align-items: center; padding-right: 20px;">
+                                <button class="copy-code-btn" style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="snippet-content">
+<pre style="color: #94a3b8;"><span style="color: #c084fc;">import</span> <span style="color: #4ade80;">'package:dotenv/dotenv.dart'</span>;
+<span style="color: #c084fc;">import</span> <span style="color: #4ade80;">'package:main/mian.dart'</span>;
+
+<span style="color: #c084fc;">final</span> env = <span style="color: #60a5fa;">DotEnv</span>()..load();
+
+Future&lt;<span style="color: #c084fc;">void</span>&gt; <span style="color: #60a5fa;">main</span>() <span style="color: #c084fc;">async</span> {
+  <span style="color: #c084fc;">await</span> <span style="color: #60a5fa;">getRates</span>(env);
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-note">
+                        <span class="material-symbols-outlined">terminal</span>
+                        <div class="alert-content">
+                            <h6>Comandos de Ejecución</h6>
+                            <pre style="margin: 0; color: var(--text-main); font-size: 0.85rem; font-family: 'JetBrains Mono';">flutter pub get <span style="color: #64748b;"># para instalar los paquetes</span>
+dart run <span style="color: #64748b;"># para ejecutar el script</span></pre>
                         </div>
                     </div>
                 </section>
@@ -583,6 +647,13 @@ headers = { <span style="color: #4ade80;">"x-api-key"</span>: api_key }
     <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">f"Error al hacer la solicitud: {e}"</span>)
 <span style="color: #c084fc;">except</span> Exception <span style="color: #c084fc;">as</span> e:
     <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">f"Error inesperado: {e}"</span>)</pre>
+                        </div>
+                    </div>
+                    <div class="alert alert-note">
+                        <span class="material-symbols-outlined">terminal</span>
+                        <div class="alert-content">
+                            <h6>Comandos de Ejecución</h6>
+                            <pre style="margin: 0; color: var(--text-main); font-size: 0.85rem; font-family: 'JetBrains Mono';">pip install requests, dotenv<span style="color: #64748b;"> # para instalar los paquetes</span>
                         </div>
                     </div>
                 </section>
