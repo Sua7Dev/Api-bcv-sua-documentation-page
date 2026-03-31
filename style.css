@@ -1717,4 +1717,12 @@ input#input-usd {
         white-space: pre-wrap;
         word-break: break-all;
     }
+
+    /* Fix JSON response body on mobile */
+    .response-body {
+        white-space: pre-wrap !important;
+        word-break: break-all !important;
+        font-size: 0.75rem !important;
+        line-height: 1.5;
+    }
 }
