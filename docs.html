@@ -95,12 +95,16 @@
                     </a>
                     <a href="#dart" class="nav-link">
                         <span class="material-symbols-outlined">flutter</span>
-                        Dart (Flutter)
+                        Dart (Console)
                     </a>
                     <a href="#python" class="nav-link">
                         <span class="material-symbols-outlined">terminal</span>
                         Python (Requests)
                     </a>
+                    <a href="#errors" class="nav-link">
+                        <span class="material-symbols-outlined">error</span>
+                        Errores Comunes
+                    </a>                    
                 </div>
 
                 <div style="margin-top: 40px; padding-top: 40px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05);">
@@ -152,6 +156,16 @@
                         <div style="display: flex; gap: 12px; font-size: 0.9rem;">
                             <span style="color: var(--text-muted);">Formato:</span>
                             <span style="font-family: 'JetBrains Mono'; background: var(--background); padding: 2px 8px; border-radius: 4px;">JSON</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <h6 style="color: white; font-size: 0.85rem; margin-bottom: 8px;">Configuración del Entorno (.env)</h6>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Para mayor seguridad, te recomendamos guardar tu API Key en un archivo <code style="color: var(--primary);">.env</code> en la raíz de tu proyecto:</p>
+                        <div class="snippet-window" style="background: rgba(0,0,0,0.2); margin-bottom: -5px;">
+                            <div class="snippet-content" style="padding: 12px;">
+                                <pre style="margin: 0; color: #4ade80; font-size: 0.85rem; font-family: 'JetBrains Mono';">API_KEY=tu_clave_personal_aqui</pre>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -653,7 +667,79 @@ headers = { <span style="color: #4ade80;">"x-api-key"</span>: api_key }
                         <span class="material-symbols-outlined">terminal</span>
                         <div class="alert-content">
                             <h6>Comandos de Ejecución</h6>
-                            <pre style="margin: 0; color: var(--text-main); font-size: 0.85rem; font-family: 'JetBrains Mono';">pip install requests, dotenv<span style="color: #64748b;"> # para instalar los paquetes</span>
+                            <pre style="margin: 0; color: var(--text-main); font-size: 0.85rem; font-family: 'JetBrains Mono';">pip install requests python-dotenv <span style="color: #64748b;"># para instalar los paquetes</span>
+python main.py <span style="color: #64748b;"># para ejecutar el script</span></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Errors Section -->
+                <section id="errors" style="margin-bottom: 80px; margin-top: -170px;">
+                    <h2 class="flex items-center gap-2" style="font-size: 1.75rem; margin-bottom: 24px;">
+                        <span class="material-symbols-outlined" style="color: #f87171;">report_problem</span>
+                        Errores Comunes
+                    </h2>
+
+                    <div class="config-card" style="border-left: 4px solid #f87171;">
+                        <h4 style="color: white; margin-bottom: 16px;">Solución al error "list indices must be integers or slices, not str"</h4>
+                        <p style="margin-bottom: 16px; font-size: 0.95rem; line-height: 1.6;">
+                            Este error ocurre porque la respuesta de la API es una <b>lista</b> y no un diccionario. Para solucionarlo, el script debe verificar si la respuesta es una lista y tomar el primer elemento antes de acceder a las claves.
+                        </p>
+
+                        <div class="alert alert-note" style="margin-bottom: 20px; background: rgba(248, 113, 113, 0.05); border-color: rgba(248, 113, 113, 0.1);">
+                            <div class="alert-content">
+                                <h6 style="color: #f87171;">¿Qué hacer si ves este error?</h6>
+                                <ol style="font-size: 0.85rem; color: var(--text-muted); list-style: decimal; padding-left: 18px; margin-top: 8px; display: flex; flex-direction: column; gap: 4px;">
+                                    <li>Asegúrate de tener la última versión del script.</li>
+                                    <li>Si la API devuelve una lista vacía, el script lanzará un error indicando que no hay datos.</li>
+                                    <li>Si la API devuelve datos, el script los procesará correctamente.</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Python Fix -->
+                        <h5 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 12px;">Solución en Python</h5>
+                        <div class="snippet-window" style="margin-bottom: 24px;">
+                            <div class="snippet-content">
+<pre style="color: #94a3b8;"><span style="color: #64748b;"># Procesa la respuesta de la API</span>
+data = response.json()
+<span style="color: #c084fc;">if</span> <span style="color: #60a5fa;">isinstance</span>(data, list):
+    <span style="color: #c084fc;">if</span> <span style="color: #60a5fa;">len</span>(data) > <span style="color: #fb923c;">0</span>:
+        data = data[<span style="color: #fb923c;">0</span>]
+    <span style="color: #c084fc;">else</span>:
+        <span style="color: #c084fc;">raise</span> <span style="color: #60a5fa;">ValueError</span>(<span style="color: #4ade80;">"La respuesta de la API es una lista vacía."</span>)
+
+<span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">f"{data['nombre']}: {data['valor']}"</span>)</pre>
+                            </div>
+                        </div>
+
+                        <!-- JS Fix -->
+                        <h5 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 12px;">Solución en JavaScript</h5>
+                        <div class="snippet-window" style="margin-bottom: 24px;">
+                            <div class="snippet-content">
+<pre style="color: #94a3b8;"><span style="color: #c084fc;">let</span> data = <span style="color: #c084fc;">await</span> response.<span style="color: #60a5fa;">json</span>();
+<span style="color: #64748b;">// Si es array, toma el primer elemento</span>
+<span style="color: #c084fc;">if</span> (Array.<span style="color: #60a5fa;">isArray</span>(data)) {
+    data = data.length > <span style="color: #fb923c;">0</span> ? data[<span style="color: #fb923c;">0</span>] : <span style="color: #c084fc;">null</span>;
+}
+
+<span style="color: #c084fc;">if</span> (data) {
+    console.<span style="color: #60a5fa;">log</span>(<span style="color: #4ade80;">`</span><span style="color: #c084fc;">${</span>data.nombre<span style="color: #c084fc;">}</span><span style="color: #4ade80;">: </span><span style="color: #c084fc;">${</span>data.valor<span style="color: #c084fc;">}</span><span style="color: #4ade80;">`</span>);
+}</pre>
+                            </div>
+                        </div>
+
+                        <!-- Dart Fix -->
+                        <h5 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 12px;">Solución en Dart</h5>
+                        <div class="snippet-window">
+                            <div class="snippet-content">
+<pre style="color: #94a3b8;"><span style="color: #c084fc;">final</span> data = <span style="color: #60a5fa;">jsonDecode</span>(res.body);
+<span style="color: #64748b;">// Validación de tipo de dato</span>
+<span style="color: #c084fc;">if</span> (data <span style="color: #c084fc;">is</span> List &amp;&amp; data.isNotEmpty) {
+    <span style="color: #c084fc;">final</span> firstItem = data[<span style="color: #fb923c;">0</span>];
+    <span style="color: #60a5fa;">print</span>(<span style="color: #4ade80;">'Datos: </span><span style="color: #c084fc;">${</span>firstItem[<span style="color: #4ade80;">"valor"</span>]<span style="color: #c084fc;">}</span><span style="color: #4ade80;">'</span>);
+}</pre>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -775,6 +861,7 @@ headers = { <span style="color: #4ade80;">"x-api-key"</span>: api_key }
                 <a href="#javascript" class="toc-link">JS Example</a>
                 <a href="#dart" class="toc-link">Dart Example</a>
                 <a href="#python" class="toc-link">Python Example</a>
+                <a href="#errors" class="toc-link">Errores</a>
                 <a href="#changelog" class="toc-link">Changelog</a>
             </nav>
         </aside>

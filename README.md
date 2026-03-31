@@ -126,8 +126,31 @@ flutter pub get  # Instalar dependencias
 dart run         # Ejecutar script
 ```
 
+## ⚠️ Errores Comunes
+
+### "list indices must be integers or slices, not str"
+Este es el error más común y sucede porque la API devuelve una **lista** y no un objeto directo.
+
+**Solución rápida (Python):**
+```python
+data = response.json()
+if isinstance(data, list):
+    data = data[0] if len(data) > 0 else None
+print(data['valor'])
+```
+
+**Solución rápida (JS):**
+```javascript
+let data = await response.json();
+if (Array.isArray(data)) data = data[0];
+console.log(data.valor);
+```
+
+## 🔐 Autenticación y API Keys
+
 ## Registro de Cambios (Timeline)
 
+- **v1.7.1 (Marzo 31, 2026)**: Añadida sección de **Errores Comunes** para resolver problemas de indexación de listas en Python, JS y Dart. Guía de configuración de entorno `.env` incluida.
 - **v1.7.0 (Marzo 31, 2026)**: Reestructuración de la documentación de Dart. Ejemplo migrado a **Console Application** con soporte para `dotenv`, múltiples archivos y comandos de ejecución detallados.
 - **v1.6.5 (Marzo 31, 2026)**: Arreglo definitivo de alineación global para PC y Mobile. Se forzó la expansión total de los elementos de endpoint para una interfaz uniforme y profesional. Limpieza de parámetros de caché en HTML.
 - **v1.6.4 (Marzo 31, 2026)**: Unificación global de anchos para los elementos de endpoint (PC y Móvil), garantizando una estética "bloqueada" y profesional en todas las resoluciones.
