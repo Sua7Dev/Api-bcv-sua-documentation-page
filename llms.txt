@@ -1,0 +1,35 @@
+# Sua-BCV API
+
+API de Tasa Cambiaria de Venezuela (BCV y Paralelo) optimizada para Edge Runtime y Bun.
+
+## Descripción del Proyecto
+Sua-BCV es una infraestructura moderna diseñada para proporcionar datos cambiarios oficiales y paralelos de Venezuela con latencia mínima. Utiliza Bun runtime, Vercel Edge Functions y Upstash Redis para asegurar alta disponibilidad y rapidez.
+
+## Documentación Principal
+- [Página de Inicio](https://api-bcv-sua-documentation-page.vercel.app/)
+- [Documentación Oficial](https://api-bcv-sua-documentation-page.vercel.app/docs.html)
+
+## Endpoints de la API
+Base URL: `https://api-bcv-sua.vercel.app`
+
+### Endpoints Oficiales (BCV)
+- `GET /v1/usd`: Tasa Oficial Dólar.
+- `GET /v1/eur`: Tasa Oficial Euro.
+- `GET /v1/cotizaciones`: Resumen BCV (USD + EUR).
+
+### Endpoints Paralelos
+- `GET /v1/usd-par`: Tasa Paralelo Dólar.
+- `GET /v1/eur-par`: Tasa Paralela Euro.
+- `GET /v1/cotizaciones-par`: Resumen Paralelo (USD + EUR).
+
+### Otros
+- `GET /v1/cotizaciones-all`: Todas las tasas (Oficial + Paralelo).
+- `GET /v1/usd-all`: Todas las fuentes de Dólar.
+- `GET /ping`: Health check.
+
+## Autenticación
+Requiere encabezado `x-api-key`. Las llaves se gestionan en la sección de documentación tras autenticarse con GitHub.
+
+## Registro de Cambios Recientes
+- v1.5: Separación de tasas oficiales y paralelas.
+- v1.5.1: Mejoras en responsividad y navegación móvil.

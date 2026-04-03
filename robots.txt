@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://api-bcv-sua-documentation-page.vercel.app/sitemap.xml
