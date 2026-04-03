@@ -15,7 +15,7 @@ La solución definitiva para obtener tasas de cambio oficiales del Banco Central
 - **Documentación Interactiva**: Prueba los endpoints directamente desde el navegador en múltiples lenguajes (JS, Dart, Python).
 - **Estética Premium**: Diseño moderno con modo oscuro, efectos de glassmorfismo y animaciones fluidas.
 - **Planes Flexibles**: Desde acceso gratuito hasta licencias permanentes con soporte prioritario.
-- **Optimización SEO**: Indexación avanzada con `Sitemap.xml`, `Robots.txt`, `llms.txt` y Datos Estructurados (Schema.org).
+- **Optimización SEO & Rendimiento**: Precarga de fuentes, carga diferida de scripts, Datos Estructurados (Schema.org) y cumplimiento de estándares de accesibilidad (WCAG 2.1).
 
 ## 💳 Planes y Precios
 
@@ -151,6 +151,8 @@ console.log(data.valor);
 
 ## Registro de Cambios (Timeline)
 
+- **v1.8.2 (Actual)**: Restauración de estabilidad visual y corrección de iconos. Eliminado `defer` de Tailwind que causaba FOUC.
+- **v1.8.1**: Mejoras críticas de rendimiento móvil y accesibilidad WCAG 2.1.
 - **v1.8.0 (Abril 03, 2026)**: Plan de Indexación Completado. Implementación de `Sitemap.xml`, `Robots.txt`, `llms.txt` (optimizado para LLMs) e integración de Datos Estructurados (JSON-LD) en todas las páginas para mejorar resultados enriquecidos y visibilidad en buscadores e IAs.
 - **v1.7.2 (Marzo 31, 2026)**: Optimización crítica de responsividad. Corrección de alineación de botones CTA en landing page, forzado de una sola línea en endpoints móviles (con scroll horizontal) y aumento del breakpoint del Índice (TOC) a 1280px para evitar superposiciones en laptops pequeñas.
 - **v1.7.1 (Marzo 31, 2026)**: Añadida sección de **Errores Comunes** para resolver problemas de indexación de listas en Python, JS y Dart. Guía de configuración de entorno `.env` incluida.

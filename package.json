@@ -6,5 +6,12 @@
     "@libsql/client": "^0.17.0",
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.2.2"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i ./style.css -o ./tailwind.min.css --minify",
+    "dev:css": "tailwindcss -i ./style.css -o ./tailwind.min.css --watch"
   }
 }
